@@ -115,7 +115,7 @@ function RadarChart({ datasets, size = 280 }) {
       {angles.map((a, i) => {
         const lx = cx + Math.cos(a) * (r + 22);
         const ly = cy + Math.sin(a) * (r + 22);
-        return <text key={i} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" fontSize="11" fontWeight="500" fill="var(--color-text-primary)" opacity="0.85">{labels[i]}</text>;
+        return <text key={i} x={lx} y={ly} textAnchor="middle" dominantBaseline="middle" fontSize="11" fontWeight="500" fill="#a8a4f0" opacity="1">{labels[i]}</text>;
       })}
       {datasets.map((ds, di) => {
         if (!ds) return null;
