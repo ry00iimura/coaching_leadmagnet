@@ -11,7 +11,6 @@ const QUESTIONS_A = [
   { id: "A_N2", func: "N", text: "物事の表面より、その背景にある意味や意図が気になる" },
 ];
 
-// PHASE B：強制選択式 8ペア（6通りの組み合わせを網羅）
 const QUESTIONS_B = [
   { id: "B1", funcA: "T", funcB: "F", textA: "もっと論理的に整理できる自分", textB: "もっと感情に正直になれる自分" },
   { id: "B2", funcA: "S", funcB: "N", textA: "今この瞬間を味わえる自分", textB: "もっと大きなビジョンで動ける自分" },
@@ -45,7 +44,6 @@ const FUNC_DESC = {
   N: "見えない可能性・パターン・意味を直観する機能。未来、抽象、背景にある文脈を読む。",
 };
 
-// PHASE A：5段階スコアの平均を1〜5にそのまま使う
 function calcScoresA(answers) {
   const totals = { T: 0, F: 0, S: 0, N: 0 };
   const counts = { T: 0, F: 0, S: 0, N: 0 };
@@ -60,9 +58,6 @@ function calcScoresA(answers) {
   );
 }
 
-// PHASE B：強制選択の得票数を1〜5にスケール変換
-// 各機能の最大得票数はT:3, F:2, S:2, N:3（出現回数に依存）
-// → 得票数 / 各機能の出現回数 × 4 + 1 で1〜5に正規化
 function calcScoresB(answers) {
   const counts = { T: 0, F: 0, S: 0, N: 0 };
   const appearances = { T: 0, F: 0, S: 0, N: 0 };
@@ -296,6 +291,7 @@ export default function App() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiComment, setAiComment] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
+  const [lineRegistered, setLineRegistered] = useState(false);
   const topRef = useRef(null);
   const resultRef = useRef(null);
 
@@ -304,6 +300,14 @@ export default function App() {
   const allAAnswered = QUESTIONS_A.every(q => answersA[q.id] !== undefined);
   const allBAnswered = QUESTIONS_B.every(q => answersB[q.id] !== undefined);
   const dominantA = Object.entries(scoresA).sort((a, b) => b[1] - a[1])[0]?.[0];
+
+  // localStorageのフラグを起動時に確認
+  useEffect(() => {
+    try {
+      const flag = localStorage.getItem("line_registered");
+      if (flag === "true") setLineRegistered(true);
+    } catch (e) {}
+  }, []);
 
   useEffect(() => { topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }, [phase]);
 
@@ -353,6 +357,15 @@ ${sC ? `MBTIベースの混在スコア：思考${sC.T.toFixed(1)} 感情${sC.F.
     setMbtiScores(null);
     setPhase("result");
     fetchAiComment(scoresA, scoresB, null);
+  }
+
+  // LINE登録ボタン押下
+  function handleLineClick() {
+    try {
+      localStorage.setItem("line_registered", "true");
+    } catch (e) {}
+    setLineRegistered(true);
+    window.open("https://line.me/R/ti/p/@034rnllo", "_blank");
   }
 
   async function handleDownloadPdf() {
@@ -530,71 +543,119 @@ th{padding:6px 10px;text-align:left;background:#f7f7f7;font-size:11px;font-weigh
             <h2 style={{ fontSize: "18px", fontWeight: "500", margin: "0 0 6px", color: "var(--color-text-primary)" }}>あなたの心理的機能マップ</h2>
           </div>
 
-          {/* 読み方ガイド */}
-          <ChartGuide hasMbti={!!mbtiScores} />
-
-          {/* レーダーチャート */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", marginBottom: "1.5rem" }}>
-            <RadarChart datasets={[scoresA, scoresB, mbtiScores]} size={280} />
-            <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "var(--color-text-secondary)" }}>
-              {legendItems.map(l => (
-                <span key={l.label} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                  <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: l.color, display: "inline-block" }} />
-                  {l.label}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* スコアカード */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "10px", marginBottom: "1.5rem" }}>
-            {["T","F","S","N"].map(k => (
-              <div key={k} style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "12px" }}>
-                <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", margin: "0 0 4px", fontWeight: "500" }}>{FUNC_LABELS[k]}</p>
-                <div style={{ display: "flex", gap: "6px", alignItems: "baseline" }}>
-                  <span style={{ fontSize: "20px", fontWeight: "500", color: "#7F77DD" }}>{scoresA[k].toFixed(1)}</span>
-                  <span style={{ fontSize: "12px", color: "#1D9E75" }}>→{scoresB[k].toFixed(1)}</span>
-                  {mbtiScores && <span style={{ fontSize: "12px", color: "#EF9F27" }}>/{mbtiScores[k].toFixed(1)}</span>}
+          {/* ブラー対象エリア（チャート含む全体） */}
+          <div style={{ position: "relative" }}>
+            {/* コンテンツ本体 */}
+            <div style={{
+              filter: lineRegistered ? "none" : "blur(6px)",
+              userSelect: lineRegistered ? "auto" : "none",
+              pointerEvents: lineRegistered ? "auto" : "none",
+              transition: "filter 0.4s ease",
+            }}>
+              {/* レーダーチャート */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", marginBottom: "1.5rem" }}>
+                <RadarChart datasets={[scoresA, scoresB, mbtiScores]} size={280} />
+                <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "var(--color-text-secondary)" }}>
+                  {legendItems.map(l => (
+                    <span key={l.label} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                      <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: l.color, display: "inline-block" }} />
+                      {l.label}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
 
-          <GapAnalysis scoreA={scoresA} scoreB={scoresB} scoreC={mbtiScores} />
-          {dominantA && <InferiorFunctionNote scores={scoresA} />}
+              <ChartGuide hasMbti={!!mbtiScores} />
 
-          {/* カクさんのメッセージ */}
-          <div style={{ border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "1.25rem", marginTop: "1.5rem", background: "var(--color-background-primary)" }}>
-            <p style={{ fontSize: "12px", color: "#7F77DD", fontWeight: "500", margin: "0 0 8px", letterSpacing: "0.04em" }}>カクさん（AIコーチ）からのメッセージ</p>
-            {aiLoading ? (
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--color-text-tertiary)", fontSize: "13px" }}>
-                <span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid #7F77DD", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-                カクさんが分析中…
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "10px", marginBottom: "1.5rem" }}>
+                {["T","F","S","N"].map(k => (
+                  <div key={k} style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "12px" }}>
+                    <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", margin: "0 0 4px", fontWeight: "500" }}>{FUNC_LABELS[k]}</p>
+                    <div style={{ display: "flex", gap: "6px", alignItems: "baseline" }}>
+                      <span style={{ fontSize: "20px", fontWeight: "500", color: "#7F77DD" }}>{scoresA[k].toFixed(1)}</span>
+                      <span style={{ fontSize: "12px", color: "#1D9E75" }}>→{scoresB[k].toFixed(1)}</span>
+                      {mbtiScores && <span style={{ fontSize: "12px", color: "#EF9F27" }}>/{mbtiScores[k].toFixed(1)}</span>}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>{aiComment}</p>
+
+              <GapAnalysis scoreA={scoresA} scoreB={scoresB} scoreC={mbtiScores} />
+              {dominantA && <InferiorFunctionNote scores={scoresA} />}
+
+              {/* カクさんのメッセージ */}
+              <div style={{ border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "1.25rem", marginTop: "1.5rem", background: "var(--color-background-primary)" }}>
+                <p style={{ fontSize: "12px", color: "#7F77DD", fontWeight: "500", margin: "0 0 8px", letterSpacing: "0.04em" }}>カクさん（AIコーチ）からのメッセージ</p>
+                {aiLoading ? (
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--color-text-tertiary)", fontSize: "13px" }}>
+                    <span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid #7F77DD", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+                    カクさんが分析中…
+                  </div>
+                ) : (
+                  <p style={{ fontSize: "14px", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>{aiComment}</p>
+                )}
+              </div>
+
+              {/* 登録済みCTA */}
+              <div style={{ marginTop: "2rem", border: "0.5px solid rgba(127,119,221,0.35)", borderRadius: "var(--border-radius-lg)", padding: "1.5rem", background: "rgba(127,119,221,0.04)" }}>
+                <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: "0 0 16px", lineHeight: "1.6" }}>
+                  劣等機能が「なんか違う」の正体である理由と、それをコーチングでどう扱うかをスケに直接話してみませんか。
+                </p>
+                <a href="https://line.me/R/ti/p/@034rnllo" target="_blank" rel="noopener noreferrer"
+                  style={{ display: "block", textAlign: "center", padding: "14px", background: "#06C755", color: "#fff", borderRadius: "var(--border-radius-lg)", fontSize: "15px", fontWeight: "500", textDecoration: "none" }}>
+                  体験セッションを申し込む
+                </a>
+              </div>
+            </div>
+
+            {/* 未登録時オーバーレイ */}
+            {!lineRegistered && (
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "calc(100% - 2rem)",
+                background: "var(--color-background-primary)",
+                border: "0.5px solid rgba(127,119,221,0.4)",
+                borderRadius: "var(--border-radius-lg)",
+                padding: "1.75rem 1.5rem",
+                textAlign: "center",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
+                zIndex: 10,
+              }}>
+                <p style={{ fontSize: "16px", fontWeight: "500", color: "var(--color-text-primary)", margin: "0 0 8px", lineHeight: "1.5" }}>
+                  診断結果の詳細を<br />LINEで受け取る
+                </p>
+                <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: "0 0 20px", lineHeight: "1.6" }}>
+                  スコアの読み方・劣等機能の解説・カクさんからのメッセージをお届けします
+                </p>
+                <button onClick={handleLineClick}
+                  style={{ width: "100%", padding: "14px", background: "#06C755", color: "#fff", border: "none", borderRadius: "var(--border-radius-lg)", fontSize: "15px", fontWeight: "500", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                  </svg>
+                  LINEで結果を受け取る
+                </button>
+                <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", margin: "12px 0 0", lineHeight: "1.5" }}>
+                  友だち追加後、このページに戻ると結果が表示されます
+                </p>
+              </div>
             )}
           </div>
 
-          {/* CTA */}
-          <div style={{ marginTop: "2rem", border: "0.5px solid rgba(127,119,221,0.35)", borderRadius: "var(--border-radius-lg)", padding: "1.5rem", background: "rgba(127,119,221,0.04)" }}>
-            <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: "0 0 16px", lineHeight: "1.6" }}>
-              劣等機能が「なんか違う」の正体である理由と、それをコーチングでどう扱うかをNote記事で解説しています。
-            </p>
-            <a href="https://lin.ee/zYGCK8k" target="_blank" rel="noopener noreferrer"
-              style={{ display: "block", textAlign: "center", padding: "14px", background: "#06C755", color: "#fff", borderRadius: "var(--border-radius-lg)", fontSize: "15px", fontWeight: "500", textDecoration: "none" }}>
-              スケカク LINE公式アカウント
-            </a>
-          </div>
-
-          {/* ダウンロード */}
-          <button onClick={handleDownloadPdf} disabled={pdfLoading || aiLoading}
-            style={{ marginTop: "12px", width: "100%", padding: "12px", background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-secondary)", borderRadius: "var(--border-radius-lg)", fontSize: "14px", color: "var(--color-text-secondary)", cursor: pdfLoading || aiLoading ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
-            {pdfLoading
-              ? <><span style={{ display: "inline-block", width: "12px", height: "12px", border: "2px solid #7F77DD", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />準備中…</>
-              : "この結果をダウンロード"
-            }
-          </button>
+          {/* ダウンロード・やり直し（ブラー外） */}
+          {lineRegistered && (
+            <>
+              <button onClick={handleDownloadPdf} disabled={pdfLoading || aiLoading}
+                style={{ marginTop: "12px", width: "100%", padding: "12px", background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-secondary)", borderRadius: "var(--border-radius-lg)", fontSize: "14px", color: "var(--color-text-secondary)", cursor: pdfLoading || aiLoading ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                {pdfLoading
+                  ? <><span style={{ display: "inline-block", width: "12px", height: "12px", border: "2px solid #7F77DD", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />準備中…</>
+                  : "この結果をダウンロード"
+                }
+              </button>
+            </>
+          )}
 
           <button onClick={() => { setPhase("welcome"); setAnswersA({}); setAnswersB({}); setMbtiInput(""); setMbtiScores(null); setAiComment(""); }}
             style={{ marginTop: "10px", width: "100%", padding: "10px", background: "transparent", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-md)", fontSize: "13px", color: "var(--color-text-secondary)", cursor: "pointer" }}>
