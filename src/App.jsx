@@ -161,35 +161,40 @@ function QuestionCardA({ question, index, total, answer, onAnswer }) {
 
 function QuestionCardB({ question, index, total, answer, onAnswer }) {
   return (
-    <div style={{ marginBottom: "1.5rem" }}>
-      <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", fontWeight: "500", margin: "0 0 12px", letterSpacing: "0.05em" }}>{index + 1} / {total}</p>
-      <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: "0 0 10px" }}>理想の自分に近いのはどちらですか？</p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <div style={{ marginBottom: "2rem" }}>
+      <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", fontWeight: "500", margin: "0 0 8px", letterSpacing: "0.05em" }}>{index + 1} / {total}</p>
+      <p style={{ fontSize: "15px", fontWeight: "600", color: "var(--color-text-primary)", margin: "0 0 4px", lineHeight: "1.6" }}>理想の自分に近いのはどちらですか？</p>
+      <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", margin: "0 0 14px" }}>直感で選んでください</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {[
           { func: question.funcA, text: question.textA },
           { func: question.funcB, text: question.textB },
         ].map(opt => (
-          <button key={opt.func} onClick={() => onAnswer(opt.func)}
+          <label key={opt.func}
             style={{
-              padding: "14px 16px", textAlign: "left",
+              padding: "14px 16px",
               border: answer === opt.func ? "1.5px solid #1D9E75" : "0.5px solid var(--color-border-tertiary)",
               borderRadius: "var(--border-radius-md)",
               background: answer === opt.func ? "rgba(29,158,117,0.08)" : "var(--color-background-primary)",
-              color: answer === opt.func ? "#1D9E75" : "var(--color-text-primary)",
-              fontSize: "14px", fontWeight: answer === opt.func ? "500" : "400",
-              cursor: "pointer", transition: "all 0.15s", lineHeight: "1.5",
-              display: "flex", alignItems: "center", gap: "10px",
+              cursor: "pointer", transition: "all 0.15s",
+              display: "flex", alignItems: "center", gap: "12px",
             }}>
+            <input
+              type="radio"
+              name={`question_${question.id}`}
+              value={opt.func}
+              checked={answer === opt.func}
+              onChange={() => onAnswer(opt.func)}
+              style={{ width: "18px", height: "18px", flexShrink: 0, accentColor: "#1D9E75", cursor: "pointer" }}
+            />
             <span style={{
-              width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
-              border: answer === opt.func ? "2px solid #1D9E75" : "1.5px solid var(--color-border-secondary)",
-              background: answer === opt.func ? "#1D9E75" : "transparent",
-              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "14px", lineHeight: "1.5",
+              fontWeight: answer === opt.func ? "500" : "400",
+              color: answer === opt.func ? "#1D9E75" : "var(--color-text-primary)",
             }}>
-              {answer === opt.func && <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#fff", display: "block" }} />}
+              {opt.text}
             </span>
-            {opt.text}
-          </button>
+          </label>
         ))}
       </div>
     </div>
@@ -364,8 +369,10 @@ ${sC ? `MBTIベースの混在スコア：思考${sC.T.toFixed(1)} 感情${sC.F.
     try {
       localStorage.setItem("line_registered", "true");
     } catch (e) {}
-    setLineRegistered(true);
+    // LINEを別タブ/アプリで開く
     window.open("https://line.me/R/ti/p/@034rnllo", "_blank");
+    // 現在のページは即座にブラー解除して結果を表示
+    setLineRegistered(true);
   }
 
   async function handleDownloadPdf() {
@@ -543,28 +550,27 @@ th{padding:6px 10px;text-align:left;background:#f7f7f7;font-size:11px;font-weigh
             <h2 style={{ fontSize: "18px", fontWeight: "500", margin: "0 0 6px", color: "var(--color-text-primary)" }}>あなたの心理的機能マップ</h2>
           </div>
 
-          {/* ブラー対象エリア（チャート含む全体） */}
+          {/* レーダーチャート（ブラーなし） */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", marginBottom: "1.5rem" }}>
+            <RadarChart datasets={[scoresA, scoresB, mbtiScores]} size={280} />
+            <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "var(--color-text-secondary)" }}>
+              {legendItems.map(l => (
+                <span key={l.label} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                  <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: l.color, display: "inline-block" }} />
+                  {l.label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* ブラー対象エリア（チャート以外） */}
           <div style={{ position: "relative" }}>
-            {/* コンテンツ本体 */}
             <div style={{
               filter: lineRegistered ? "none" : "blur(6px)",
               userSelect: lineRegistered ? "auto" : "none",
               pointerEvents: lineRegistered ? "auto" : "none",
               transition: "filter 0.4s ease",
             }}>
-              {/* レーダーチャート */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", marginBottom: "1.5rem" }}>
-                <RadarChart datasets={[scoresA, scoresB, mbtiScores]} size={280} />
-                <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "var(--color-text-secondary)" }}>
-                  {legendItems.map(l => (
-                    <span key={l.label} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                      <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: l.color, display: "inline-block" }} />
-                      {l.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
               <ChartGuide hasMbti={!!mbtiScores} />
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "10px", marginBottom: "1.5rem" }}>
