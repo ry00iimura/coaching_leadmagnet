@@ -229,173 +229,389 @@ function GapAnalysis({ scoreA, scoreB, scoreC }) {
 
 function SalesLP({ dominantFunc }) {
   const label = FUNC_LABELS[dominantFunc] || "思考";
-
-  const Block = ({ children, style = {} }) => (
-    <div style={{ padding: "2rem 0", borderBottom: "0.5px solid var(--color-border-tertiary)", ...style }}>
-      {children}
-    </div>
+  const lineHref = "https://line.me/R/ti/p/@034rnllo";
+  const lineIcon = (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+    </svg>
   );
-  const H = ({ children }) => (
-    <h2 style={{ fontSize: "20px", fontWeight: "600", lineHeight: "1.6", color: "var(--color-text-primary)", margin: "0 0 0.75rem" }}>{children}</h2>
-  );
-  const P = ({ children }) => (
-    <p style={{ fontSize: "14px", lineHeight: "1.9", color: "var(--color-text-secondary)", margin: "0 0 0.75rem" }}>{children}</p>
-  );
-  const Callout = ({ children, color = "rgba(127,119,221,0.08)", border = "rgba(127,119,221,0.3)" }) => (
-    <div style={{ background: color, border: `0.5px solid ${border}`, borderRadius: "var(--border-radius-lg)", padding: "1.25rem 1.5rem", margin: "1rem 0" }}>
-      {children}
-    </div>
+  const LineBtn = ({ label: btnLabel = "LINEで体験セッションを申し込む", size = "lg" }) => (
+    <a href={lineHref} target="_blank" rel="noopener noreferrer" style={{
+      display: "flex", alignItems: "center", justifyContent: "center", gap: "10px",
+      padding: size === "lg" ? "18px 24px" : "14px 20px",
+      background: "linear-gradient(135deg, #06C755 0%, #05a847 100%)",
+      color: "#fff", borderRadius: "14px",
+      fontSize: size === "lg" ? "17px" : "15px", fontWeight: "700",
+      textDecoration: "none", letterSpacing: "0.02em",
+      boxShadow: "0 4px 20px rgba(6,199,85,0.35)",
+    }}>
+      {lineIcon}{btnLabel}
+    </a>
   );
 
   return (
-    <div style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid var(--color-border-secondary)" }}>
-      <p style={{ fontSize: "11px", letterSpacing: "0.1em", color: "#7F77DD", fontWeight: "500", margin: "0 0 2rem", textTransform: "uppercase" }}>Coaching by Sukekaku</p>
+    <div style={{ marginTop: "4rem" }}>
 
-      {/* Hook */}
-      <Block>
-        <H>診断はいかがでしたか？</H>
-        <P>もしかして、今こんな疑問を持っていませんか？</P>
-        <Callout>
-          <p style={{ fontSize: "17px", fontWeight: "500", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>
-            どうすれば、<br />「現実」と「理想」のギャップを<br />埋められるんだろう？
+      {/* ── HERO ── */}
+      <div style={{
+        background: "linear-gradient(160deg, #0d0d1f 0%, #1a1040 60%, #0d1a12 100%)",
+        borderRadius: "20px", padding: "3rem 2rem 2.5rem", textAlign: "center", marginBottom: "1.5rem",
+      }}>
+        <span style={{
+          display: "inline-block", padding: "4px 14px",
+          background: "rgba(127,119,221,0.2)", border: "1px solid rgba(127,119,221,0.4)",
+          borderRadius: "100px", fontSize: "11px", color: "#a8a4f0",
+          letterSpacing: "0.12em", fontWeight: "600", marginBottom: "1.5rem",
+        }}>COACHING BY SUKEKAKU</span>
+        <h2 style={{ fontSize: "30px", fontWeight: "700", color: "#fff", lineHeight: "1.45", margin: "0 0 1rem" }}>
+          診断はいかがでしたか？
+        </h2>
+        <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)", lineHeight: "1.7", margin: "0 0 1.75rem" }}>
+          もしかして、今こんな疑問を持っていませんか？
+        </p>
+        <div style={{
+          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
+          borderRadius: "16px", padding: "1.75rem 1.5rem",
+        }}>
+          <p style={{ fontSize: "20px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: 0 }}>
+            「現実」と「理想」のギャップを<br />どうすれば埋められるんだろう？
           </p>
-        </Callout>
-      </Block>
-
-      {/* Validation */}
-      <Block>
-        <P>そのような疑問は、当然です。</P>
-        <H>そして、その疑問を持っていること自体が、<br />今のあなたが<strong style={{ color: "#7F77DD" }}>「{label}」優位</strong>であることの証明でもあります。</H>
-      </Block>
-
-      {/* No universal solution */}
-      <Block>
-        <P>ここでご紹介するのは、{label}優位なあなたが「現実」と「理想」のギャップを埋めるための方法です。</P>
-        <P>いきなりで申し訳ないのですが——</P>
-        <H style={{ fontSize: "22px" }}>残念ながら、<br />{label}優位な方の「現実」と「理想」を埋める<br />万人向けの方法は、存在しません。</H>
-      </Block>
-
-      {/* Smart person dilemma */}
-      <Block>
-        <P>思い出してみてください。{label}優位で、おそらく思考力が人より高いあなたは、他人から示された解決策を見て、だいたいこう感じていませんか？</P>
-        <Callout color="var(--color-background-secondary)" border="var(--color-border-tertiary)">
-          <p style={{ fontSize: "15px", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0, fontStyle: "italic" }}>
-            「これ、正しそうに見えるけど、<br />自分にも当てはまるかどうかなんてわからないよね？」
-          </p>
-        </Callout>
-        <P style={{ marginTop: "1rem" }}>本当にあなたにとって価値のある解決策は、<strong style={{ color: "var(--color-text-primary)" }}>「あなた」にしか導き出せない</strong>のです。</P>
-        <P>なぜなら、この世で最もあなたを知っているのは、あなただからです。</P>
-      </Block>
-
-      {/* The paradox */}
-      <Block>
-        <P>裏を返せば、あなたの中にある答えを、あなたが見つけさえすれば——思考優位から脱して、理想の状態を実現できます。</P>
-        <H>でも、もし答えがあなたの中にあるなら、<br />なぜ優秀なあなたに今まで見つけられなかったのでしょう？</H>
-      </Block>
-
-      {/* Thinking won't work */}
-      <Block>
-        <P>「自分の中に答えがあるから、考えれば、わかるはずだ。」そう思っていませんか？</P>
-        <H>悲しいですが、どれだけ考えても、答えは見つかりません。</H>
-        <P>なぜなら、「考える」というプロセスの先には、そもそも「答え」がないからです。だから、優秀なあなたが、どれだけ考えても答えにたどり着けないのです。</P>
-      </Block>
-
-      {/* Brain vs Heart */}
-      <Block>
-        <P>脳は優秀です。「どうしたいんだ？」と聞かれれば、瞬時に立派な解を返してくれます。</P>
-        <P>でも、脳が出している答えは、過去の見聞きした情報——SNSのアドバイス、本に書かれていたこと、周りから聞いた答え。あなた「以外」に通用した方法をもとにした模範解答に過ぎません。</P>
-        <Callout color="rgba(29,158,117,0.06)" border="rgba(29,158,117,0.3)">
-          <p style={{ fontSize: "15px", fontWeight: "500", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>
-            今、あなたが本当に求めている「答え」を知っているのは、あなたの「脳」ではありません。<br /><strong style={{ color: "#1D9E75" }}>あなたの「心」と「身体」が知っている</strong>のです。
-          </p>
-        </Callout>
-        <div style={{ marginTop: "0.75rem", padding: "0.75rem 1rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: "1.7" }}>
-          人間の意思決定は論理だけで行われているのではなく、「身体感覚や感情（ソマティック・マーカー）」が最終決定を下していることが証明されています。（神経科学者 アントニオ・ダマシオ）
         </div>
-      </Block>
+      </div>
 
-      {/* Somatic check */}
-      <Block>
-        <H>もし「答え」に、あなたの心が「ワクワクしていない」、想像すると「お腹がムカムカする」なら——</H>
-        <Callout>
-          <p style={{ fontSize: "16px", fontWeight: "600", color: "#7F77DD", margin: 0 }}>それは、あなたの求める「答え」じゃない。</p>
-        </Callout>
-      </Block>
-
-      {/* Jung + Can't alone */}
-      <Block>
-        <P>「よし！では身体に聞いてみよう！」と思ったかもしれません。でも、今の{label}優位なあなたが、心の叫び・身体の声を聞くのは、無茶苦茶難しいです。</P>
-        <div style={{ padding: "1rem 1.25rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", marginBottom: "1rem", fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>
-          心理学者カール・ユング博士は、人間の判断は「思考・感情・感覚・直観」の4つに基づくと主張しました。「思考」を過剰に使っていると、相対する「感情」が無意識に抑圧されます。
+      {/* ── VALIDATION ── */}
+      <div style={{
+        background: "var(--color-background-secondary)", borderRadius: "20px",
+        padding: "2rem 1.75rem", marginBottom: "1.5rem",
+      }}>
+        <p style={{ fontSize: "13px", color: "#7F77DD", fontWeight: "600", letterSpacing: "0.08em", margin: "0 0 0.75rem" }}>まず、お伝えしたいこと</p>
+        <p style={{ fontSize: "15px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>
+          その疑問は、当然です。そしてその疑問を持っていること自体が——
+        </p>
+        <div style={{ borderLeft: "3px solid #7F77DD", paddingLeft: "1.25rem" }}>
+          <p style={{ fontSize: "18px", fontWeight: "600", color: "var(--color-text-primary)", lineHeight: "1.6", margin: 0 }}>
+            今のあなたが<span style={{ color: "#7F77DD" }}>「{label}」優位</span>であることの<br />証明でもあります。
+          </p>
         </div>
-        <H>故に、「思考」ばかりを使ってきた人は、「感情」を「考えているのか」、「感じているのか」区別がつかないのです。</H>
-        <Callout color="rgba(232,74,68,0.06)" border="rgba(232,74,68,0.25)">
-          <p style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.7", color: "var(--color-text-primary)", margin: 0 }}>
-            優秀なあなたが、今の{label}優位な状態から<br /><strong style={{ color: "#E84A44" }}>一人で脱却することは、まず無理</strong>ということです。
-          </p>
-        </Callout>
-      </Block>
+      </div>
 
-      {/* Solution */}
-      <Block>
-        <P>では、どうすればいいのでしょう？</P>
-        <H style={{ fontSize: "28px", textAlign: "center", padding: "1rem 0" }}>その答えは——<br />人に話すこと</H>
-        <P>あなたが{label}優位な苦しさから脱却するためには、誰かにあなたの悩みや理想を聞いてもらい、客観的にフィードバックをもらうこと。それが回り道じゃない、最短ルートの解決策です。</P>
-        <P>ただし、聞いてもらう相手が同じように{label}優位な状態では、論理の答え合わせで終わってしまいます。</P>
-        <Callout color="var(--color-background-secondary)" border="var(--color-border-tertiary)">
-          <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: 0, lineHeight: "1.8" }}>
-            あなたの話し相手に必要なこと：<br />
-            <strong style={{ color: "var(--color-text-primary)" }}>・{label}優位ではない<br />・あなたの言葉だけでなく、声のトーンや沈黙など非言語から本当の答えを読み取れる</strong>
+      {/* ── TWIST: No universal solution ── */}
+      <div style={{
+        background: "linear-gradient(135deg, #1a0a0a 0%, #2a0f0f 100%)",
+        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
+      }}>
+        <p style={{ fontSize: "12px", color: "rgba(255,120,120,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1rem" }}>残念ながら、正直にお伝えします</p>
+        <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", lineHeight: "1.55", margin: "0 0 1.25rem" }}>
+          {label}優位な方の「現実」と「理想」を埋める<br />万人向けの方法は、<span style={{ color: "#ff7070" }}>存在しません。</span>
+        </h3>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "rgba(255,255,255,0.6)", margin: 0 }}>
+          おそらく{label}優位で分析力の高いあなたは、他人から示された解決策を見たとき、こう感じたことがあるはずです。
+        </p>
+        <div style={{
+          background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "12px", padding: "1.25rem 1.5rem", marginTop: "1.25rem",
+        }}>
+          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.85)", lineHeight: "1.75", margin: 0, fontStyle: "italic" }}>
+            「これ、正しそうに見えるけど、<br />自分にも当てはまるかはわからないよね。」
           </p>
-        </Callout>
-      </Block>
-
-      {/* Coach intro */}
-      <Block>
-        <H>私にあなたの悩みを聞かせてもらえませんか？</H>
-        <P>私はプロコーチとして、あなたの言葉にならない思いを、言語・非言語から的確にフィードバックができる存在です。</P>
-        <div style={{ padding: "1.25rem 1.5rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", margin: "1rem 0", fontSize: "14px", lineHeight: "1.9", color: "var(--color-text-secondary)" }}>
-          <p style={{ margin: "0 0 0.75rem" }}>実は、私も慢性的に思考優位な状態でした。感情より理性で人生を選択するあまり、不安やストレスで眠れない、食欲がない。何より、全然「今が楽しくない」。そんな感じでした。</p>
-          <p style={{ margin: "0 0 0.75rem" }}>しかし、カナダで出会ったメンター、日本で出会ったコーチとの<strong style={{ color: "var(--color-text-primary)" }}>9年間の対話</strong>を通じて、少しずつ「感情・感覚・直観」を取り戻して、心と身体の声に耳を傾けるようになりました。</p>
-          <p style={{ margin: 0 }}>今では、仕事をしながら、家族と日本一周をするぐらいには、<strong style={{ color: "#1D9E75" }}>自分の人生を楽しめています。</strong></p>
         </div>
-        <P>私は、これまで9年間コーチングを受け、「脳」だけじゃなく「心」と「身体」に耳を傾けるトレーニングをしてきました。だから、あなたの言語と非言語の両方から的確にフィードバックを行うことができるのです。</P>
-      </Block>
+      </div>
 
-      {/* Visualization */}
-      <Block>
-        <P>想像してみてください。</P>
-        <Callout color="rgba(239,159,39,0.06)" border="rgba(239,159,39,0.3)">
-          <p style={{ fontSize: "15px", lineHeight: "1.9", color: "var(--color-text-primary)", margin: "0 0 0.75rem" }}>
-            理想の人生を歩んでいるあなたは、<br />何を感じ、何を食べ、誰と過ごし、どんな行動をしていますか？<br />映画のワンシーンのようにイメージしてみてください。
+      {/* ── CORE TRUTH ── */}
+      <div style={{
+        borderRadius: "20px", padding: "2rem 1.75rem", marginBottom: "1.5rem",
+        border: "1px solid rgba(29,158,117,0.3)", background: "rgba(29,158,117,0.04)",
+      }}>
+        <p style={{ fontSize: "15px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
+          本当にあなたにとって価値のある解決策は——
+        </p>
+        <p style={{ fontSize: "22px", fontWeight: "700", color: "#1D9E75", lineHeight: "1.5", margin: "0 0 1rem" }}>
+          「あなた」にしか導き出せない。
+        </p>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: 0 }}>
+          この世で最もあなたを知っているのは、あなただからです。<br />
+          裏を返せば、あなたの中にある答えを見つけさえすれば、理想の状態を実現できます。
+        </p>
+      </div>
+
+      {/* ── PARADOX ── */}
+      <div style={{
+        background: "var(--color-background-secondary)", borderRadius: "20px",
+        padding: "2rem 1.75rem", marginBottom: "1.5rem",
+      }}>
+        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", fontWeight: "600", letterSpacing: "0.08em", margin: "0 0 1rem" }}>でも、ここに大きな矛盾があります</p>
+        <h3 style={{ fontSize: "20px", fontWeight: "700", color: "var(--color-text-primary)", lineHeight: "1.6", margin: "0 0 1.25rem" }}>
+          もし答えがあなたの中にあるなら、<br />なぜ優秀なあなたに<br />今まで見つけられなかったのでしょう？
+        </h3>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>
+          「自分の中に答えがあるから、考えれば、わかるはずだ。」そう思っていませんか？
+        </p>
+        <div style={{
+          background: "var(--color-background-primary)", border: "1px solid var(--color-border-secondary)",
+          borderRadius: "12px", padding: "1.25rem",
+        }}>
+          <p style={{ fontSize: "15px", fontWeight: "600", color: "var(--color-text-primary)", lineHeight: "1.7", margin: 0 }}>
+            悲しいですが、どれだけ考えても答えは見つかりません。<br />
+            <span style={{ fontSize: "13px", fontWeight: "400", color: "var(--color-text-secondary)" }}>
+              「考える」プロセスの先には、そもそも「答え」がないからです。
+            </span>
           </p>
-          <p style={{ fontSize: "14px", color: "var(--color-text-secondary)", margin: 0 }}>そのイメージには、確かな温度やワクワクするような身体の感覚が伴っていますか？</p>
-        </Callout>
-      </Block>
+        </div>
+      </div>
 
-      {/* CTA */}
-      <div style={{ marginTop: "0.5rem", background: "rgba(127,119,221,0.05)", border: "1px solid rgba(127,119,221,0.25)", borderRadius: "var(--border-radius-lg)", padding: "2rem 1.5rem", textAlign: "center" }}>
-        <p style={{ fontSize: "13px", color: "#7F77DD", fontWeight: "500", margin: "0 0 0.5rem", letterSpacing: "0.08em" }}>一人でその感覚にたどり着くのが難しいと感じたあなたへ</p>
-        <h3 style={{ fontSize: "20px", fontWeight: "600", color: "var(--color-text-primary)", margin: "0 0 1.25rem", lineHeight: "1.5" }}>体験セッションのご案内</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "1.5rem" }}>
-          {["毎月4名様限定", "60分の完全無料セッション", "無理な勧誘や押しつけは一切なし"].map(t => (
-            <div key={t} style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
-              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
-              <span style={{ fontSize: "14px", color: "var(--color-text-secondary)" }}>{t}</span>
+      {/* ── BRAIN vs HEART ── */}
+      <div style={{
+        background: "linear-gradient(160deg, #0d1a12 0%, #0d1225 100%)",
+        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
+      }}>
+        <p style={{ fontSize: "12px", color: "rgba(29,200,140,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1.25rem" }}>なぜ「考える」では答えが出ないのか</p>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "rgba(255,255,255,0.65)", margin: "0 0 1.25rem" }}>
+          脳は優秀です。「どうしたいんだ？」と聞けば、瞬時に立派な解を返してくれます。<br />
+          でも、その答えは過去に見聞きした情報——SNSのアドバイス、本、周りの言葉。あなた「以外」に通用した方法をもとにした模範解答に過ぎません。
+        </p>
+        <div style={{
+          display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "1.5rem",
+        }}>
+          {[
+            { icon: "🧠", label: "脳が出す答え", desc: "過去の情報・他人の成功例をもとにした模範解答", col: "rgba(255,100,100,0.15)", border: "rgba(255,100,100,0.3)" },
+            { icon: "💚", label: "心と身体の答え", desc: "あなただけの「ワクワク」と「嫌悪感」が示す本質", col: "rgba(29,158,117,0.15)", border: "rgba(29,158,117,0.35)" },
+          ].map(c => (
+            <div key={c.label} style={{ background: c.col, border: `1px solid ${c.border}`, borderRadius: "12px", padding: "1rem" }}>
+              <p style={{ fontSize: "22px", margin: "0 0 6px" }}>{c.icon}</p>
+              <p style={{ fontSize: "12px", fontWeight: "700", color: "#fff", margin: "0 0 6px" }}>{c.label}</p>
+              <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.6)", lineHeight: "1.6", margin: 0 }}>{c.desc}</p>
             </div>
           ))}
         </div>
-        <a href="https://line.me/R/ti/p/@034rnllo" target="_blank" rel="noopener noreferrer"
-          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", padding: "16px", background: "#06C755", color: "#fff", borderRadius: "var(--border-radius-lg)", fontSize: "16px", fontWeight: "600", textDecoration: "none", marginBottom: "1rem" }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-          </svg>
-          LINEで体験セッションを申し込む
-        </a>
-        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", margin: 0, lineHeight: "1.7" }}>
-          最後に一つだけ——<br />今の苦しさが一年後も続いていたら、あなたはどう感じますか？
+        <div style={{
+          background: "rgba(255,255,255,0.06)", borderRadius: "12px", padding: "1.25rem",
+          borderLeft: "3px solid #1D9E75",
+        }}>
+          <p style={{ fontSize: "16px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: "0 0 0.5rem" }}>
+            今、あなたが本当に求めている「答え」を知っているのは、<br />あなたの<span style={{ color: "#4DD9A0" }}>「心」と「身体」</span>です。
+          </p>
+          <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", margin: 0, lineHeight: "1.6" }}>
+            人間の意思決定は「身体感覚や感情（ソマティック・マーカー）」が最終決定を下している。— 神経科学者 アントニオ・ダマシオ
+          </p>
+        </div>
+      </div>
+
+      {/* ── SOMATIC CHECK ── */}
+      <div style={{
+        borderRadius: "20px", padding: "2rem 1.75rem", marginBottom: "1.5rem",
+        background: "var(--color-background-secondary)",
+      }}>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
+          もし「答え」を思い描いたとき——
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "1.25rem" }}>
+          {[
+            { emoji: "💛", text: "心がワクワクする", good: true },
+            { emoji: "🤢", text: "お腹がムカムカする・なんか違う", good: false },
+          ].map(r => (
+            <div key={r.text} style={{
+              display: "flex", alignItems: "center", gap: "12px", padding: "1rem 1.25rem",
+              background: r.good ? "rgba(29,158,117,0.08)" : "rgba(232,74,68,0.06)",
+              border: `1px solid ${r.good ? "rgba(29,158,117,0.25)" : "rgba(232,74,68,0.2)"}`,
+              borderRadius: "12px",
+            }}>
+              <span style={{ fontSize: "22px" }}>{r.emoji}</span>
+              <span style={{ fontSize: "14px", fontWeight: "500", color: "var(--color-text-primary)" }}>{r.text}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{
+          background: "rgba(127,119,221,0.1)", border: "1px solid rgba(127,119,221,0.3)",
+          borderRadius: "12px", padding: "1rem 1.25rem",
+        }}>
+          <p style={{ fontSize: "15px", fontWeight: "600", color: "#7F77DD", margin: 0, lineHeight: "1.6" }}>
+            「ムカムカ」「なんか違う」なら——それは、あなたが求める答えじゃない。
+          </p>
+        </div>
+      </div>
+
+      {/* ── JUNG + WARNING ── */}
+      <div style={{
+        background: "linear-gradient(160deg, #1a0d24 0%, #0d0d1f 100%)",
+        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
+      }}>
+        <p style={{ fontSize: "12px", color: "rgba(168,164,240,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1.5rem" }}>カール・ユング 心理学的タイプ論</p>
+        <div style={{
+          background: "rgba(255,255,255,0.06)", borderRadius: "14px", padding: "1.5rem",
+          marginBottom: "1.5rem", borderLeft: "3px solid #7F77DD",
+        }}>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", lineHeight: "1.85", margin: 0 }}>
+            人間の判断は「思考・感情・感覚・直観」の4つに基づいています。<strong style={{ color: "#fff" }}>「思考」を過剰に使い続けると、相対する「感情」が無意識に抑圧されます。</strong><br />
+            その結果——感情を「考えているのか」「感じているのか」の区別がつかなくなります。
+          </p>
+        </div>
+        <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", lineHeight: "1.5", margin: "0 0 1rem" }}>
+          「よし、身体に聞いてみよう！」<br />——それが、無茶苦茶難しいのです。
+        </h3>
+        <div style={{
+          background: "rgba(232,74,68,0.15)", border: "1px solid rgba(232,74,68,0.4)",
+          borderRadius: "14px", padding: "1.5rem",
+        }}>
+          <p style={{ fontSize: "17px", fontWeight: "700", color: "#fff", lineHeight: "1.6", margin: "0 0 0.5rem" }}>
+            優秀なあなたが、{label}優位な状態から<br /><span style={{ color: "#ff7070" }}>一人で脱却することは、まず無理です。</span>
+          </p>
+          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", margin: 0, lineHeight: "1.6" }}>
+            どれだけ考えても——考えること自体が、脱却の邪魔をしているからです。
+          </p>
+        </div>
+      </div>
+
+      {/* ── SOLUTION ── */}
+      <div style={{
+        borderRadius: "20px", padding: "2.5rem 1.75rem", marginBottom: "1.5rem",
+        background: "linear-gradient(135deg, rgba(29,158,117,0.08) 0%, rgba(29,158,117,0.03) 100%)",
+        border: "1px solid rgba(29,158,117,0.2)",
+      }}>
+        <p style={{ fontSize: "14px", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>では、どうすればいいのでしょう？</p>
+        <h3 style={{ fontSize: "32px", fontWeight: "800", color: "#1D9E75", textAlign: "center", lineHeight: "1.35", margin: "0 0 0.5rem", letterSpacing: "-0.02em" }}>
+          人に話すこと。
+        </h3>
+        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", textAlign: "center", margin: "0 0 1.75rem" }}>それが回り道じゃない、最短ルートです</p>
+        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
+          ただし、聞いてもらう相手が同じように{label}優位では、論理の答え合わせで終わります。
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {[
+            `${label}優位ではない`,
+            "言葉だけでなく、声のトーンや沈黙など非言語から読み取れる",
+            "あなたの内側の感覚に気づかせるフィードバックができる",
+          ].map((t, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+              <span style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1D9E75", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "2px" }}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
+              </span>
+              <span style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{t}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── COACH PROFILE ── */}
+      <div style={{
+        borderRadius: "20px", overflow: "hidden", marginBottom: "1.5rem",
+        border: "1px solid var(--color-border-secondary)",
+      }}>
+        <div style={{ background: "linear-gradient(135deg, #7F77DD 0%, #5b53c8 100%)", padding: "1.75rem 1.75rem 1.25rem" }}>
+          <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>ABOUT COACH</p>
+          <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: 0, lineHeight: "1.4" }}>
+            私に、あなたの悩みを<br />聞かせてもらえませんか？
+          </h3>
+        </div>
+        <div style={{ padding: "1.75rem", background: "var(--color-background-primary)" }}>
+          <div style={{ display: "flex", gap: "12px", alignItems: "flex-start", marginBottom: "1.25rem" }}>
+            <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg, #7F77DD, #1D9E75)", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: "22px" }}>🧭</span>
+            </div>
+            <div>
+              <p style={{ fontSize: "16px", fontWeight: "700", color: "var(--color-text-primary)", margin: "0 0 2px" }}>スケ</p>
+              <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", margin: 0 }}>プロコーチ / Sukekaku</p>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "1.5rem" }}>
+            {[
+              { year: "過去", text: "慢性的な思考優位。不安・ストレスで眠れず、「今が楽しくない」状態が続く。" },
+              { year: "転機", text: "カナダのメンター、日本のコーチとの出会い。9年間の対話を重ねる。" },
+              { year: "現在", text: "仕事をしながら家族と日本一周。心と身体の声に従って生きている。" },
+            ].map(item => (
+              <div key={item.year} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                <span style={{ fontSize: "11px", fontWeight: "700", color: "#7F77DD", padding: "2px 8px", background: "rgba(127,119,221,0.1)", borderRadius: "100px", flexShrink: 0, marginTop: "2px", whiteSpace: "nowrap" }}>{item.year}</span>
+                <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7", margin: 0 }}>{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{
+            background: "var(--color-background-secondary)", borderRadius: "12px", padding: "1rem 1.25rem",
+          }}>
+            <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.8", margin: 0 }}>
+              9年間コーチングを受け続けた日本でも珍しいプロコーチだからこそ、<strong style={{ color: "var(--color-text-primary)" }}>あなたの言語と非言語の両方から的確にフィードバック</strong>できます。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── VISUALIZATION ── */}
+      <div style={{
+        background: "linear-gradient(160deg, #1a1408 0%, #0f1a10 100%)",
+        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem", textAlign: "center",
+      }}>
+        <p style={{ fontSize: "32px", margin: "0 0 1.25rem" }}>🎬</p>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", margin: "0 0 1.25rem" }}>少し、想像してみてください。</p>
+        <p style={{ fontSize: "17px", fontWeight: "500", color: "#fff", lineHeight: "1.8", margin: "0 0 1.5rem" }}>
+          理想の人生を歩んでいるあなたは、<br />何を感じ、誰と過ごし、どんな行動をしていますか？
+        </p>
+        <div style={{
+          background: "rgba(239,159,39,0.15)", border: "1px solid rgba(239,159,39,0.35)",
+          borderRadius: "14px", padding: "1.25rem",
+        }}>
+          <p style={{ fontSize: "15px", color: "#EF9F27", fontWeight: "600", margin: 0, lineHeight: "1.7" }}>
+            そのイメージに、確かな温度と<br />ワクワクする身体の感覚は伴っていますか？
+          </p>
+        </div>
+      </div>
+
+      {/* ── OFFER CARD ── */}
+      <div style={{
+        borderRadius: "24px", overflow: "hidden", marginBottom: "1.5rem",
+        boxShadow: "0 8px 40px rgba(127,119,221,0.2)",
+      }}>
+        <div style={{
+          background: "linear-gradient(135deg, #7F77DD 0%, #9c94f0 50%, #6b62cc 100%)",
+          padding: "2rem 2rem 1.5rem", textAlign: "center",
+        }}>
+          <span style={{
+            display: "inline-block", padding: "4px 16px",
+            background: "rgba(255,255,255,0.2)", borderRadius: "100px",
+            fontSize: "11px", color: "#fff", fontWeight: "700", letterSpacing: "0.12em",
+            marginBottom: "1rem",
+          }}>毎月4名様限定</span>
+          <h3 style={{ fontSize: "26px", fontWeight: "800", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>
+            体験セッション<br />完全無料
+          </h3>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", margin: 0 }}>60分 / オンライン / 無理な勧誘なし</p>
+        </div>
+        <div style={{ background: "var(--color-background-primary)", padding: "1.75rem 2rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "1.75rem" }}>
+            {[
+              "あなたの「現実」と「理想」のギャップを整理する",
+              "心と身体が求めている本当の答えに気づく",
+              "プロコーチが言語・非言語から的確にフィードバック",
+              "押しつけや勧誘は一切ありません",
+            ].map((t, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "rgba(127,119,221,0.15)", border: "1px solid rgba(127,119,221,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "1px" }}>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#7F77DD" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                </span>
+                <span style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{t}</span>
+              </div>
+            ))}
+          </div>
+          <LineBtn />
+          <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", textAlign: "center", margin: "12px 0 0", lineHeight: "1.6" }}>
+            残枠わずか・先着順 ・LINEで簡単申し込み
+          </p>
+        </div>
+      </div>
+
+      {/* ── FINAL URGENCY ── */}
+      <div style={{
+        background: "linear-gradient(160deg, #0d0d1f 0%, #15101f 100%)",
+        borderRadius: "20px", padding: "2.5rem 2rem", textAlign: "center",
+      }}>
+        <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.5)", lineHeight: "1.7", margin: "0 0 1.5rem" }}>最後に、一つだけ聞かせてください。</p>
+        <p style={{ fontSize: "20px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: "0 0 2rem" }}>
+          今の苦しさが、<br />一年後も続いていたら——<br /><span style={{ color: "rgba(255,255,255,0.5)" }}>あなたはどう感じますか？</span>
+        </p>
+        <LineBtn label="今すぐ体験セッションを申し込む" />
+        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", margin: "1rem 0 0", lineHeight: "1.6" }}>
+          Sukekaku — ユング心理学に基づくコーチング
         </p>
       </div>
+
     </div>
   );
 }
