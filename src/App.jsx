@@ -230,6 +230,50 @@ function GapAnalysis({ scoreA, scoreB, scoreC }) {
 function SalesLP({ dominantFunc }) {
   const label = FUNC_LABELS[dominantFunc] || "思考";
   const lineHref = "https://line.me/R/ti/p/@034rnllo";
+
+  const IconCheck = ({ color = "#1D9E75" }) => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+      <circle cx="8" cy="8" r="8" fill={color} fillOpacity="0.15"/>
+      <path d="M4.5 8.5l2.5 2 4.5-5" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+  const IconX = () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+      <circle cx="8" cy="8" r="8" fill="#E84A44" fillOpacity="0.12"/>
+      <path d="M5 5l6 6M11 5l-6 6" stroke="#E84A44" strokeWidth="1.6" strokeLinecap="round"/>
+    </svg>
+  );
+  const IconBubble = () => (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M4 6a2 2 0 012-2h16a2 2 0 012 2v11a2 2 0 01-2 2H9l-5 4V6z" fill="#7F77DD" fillOpacity="0.2" stroke="#7F77DD" strokeWidth="1.5"/>
+    </svg>
+  );
+  const IconBrain = () => (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <ellipse cx="11" cy="14" rx="7" ry="8" fill="#E84A44" fillOpacity="0.15" stroke="#E84A44" strokeWidth="1.5"/>
+      <ellipse cx="19" cy="14" rx="5" ry="7" fill="#E84A44" fillOpacity="0.1" stroke="#E84A44" strokeWidth="1.5"/>
+      <line x1="14" y1="7" x2="14" y2="21" stroke="#E84A44" strokeWidth="1" strokeDasharray="2 2"/>
+    </svg>
+  );
+  const IconHeart = () => (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14 22s-9-5.5-9-11.5C5 7 7.5 5 10 5c1.5 0 3 .7 4 2a5 5 0 014-2c2.5 0 5 2 5 5.5C23 16.5 14 22 14 22z" fill="#1D9E75" fillOpacity="0.2" stroke="#1D9E75" strokeWidth="1.5"/>
+    </svg>
+  );
+  const IconWarning = () => (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14 3L26 24H2L14 3z" fill="#EF9F27" fillOpacity="0.15" stroke="#EF9F27" strokeWidth="1.5"/>
+      <line x1="14" y1="11" x2="14" y2="17" stroke="#EF9F27" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="14" cy="20" r="1" fill="#EF9F27"/>
+    </svg>
+  );
+  const IconPerson = () => (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="9" r="5" fill="#7F77DD" fillOpacity="0.2" stroke="#7F77DD" strokeWidth="1.5"/>
+      <path d="M4 24c0-5.5 4.5-9 10-9s10 3.5 10 9" stroke="#7F77DD" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+
   const lineIcon = (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
@@ -254,360 +298,345 @@ function SalesLP({ dominantFunc }) {
 
       {/* ── HERO ── */}
       <div style={{
-        background: "linear-gradient(160deg, #0d0d1f 0%, #1a1040 60%, #0d1a12 100%)",
-        borderRadius: "20px", padding: "3rem 2rem 2.5rem", textAlign: "center", marginBottom: "1.5rem",
+        background: "linear-gradient(160deg, #0e0b1f 0%, #1b1242 100%)",
+        borderRadius: "24px", padding: "3rem 2rem 2.75rem", textAlign: "center", marginBottom: "12px",
+        position: "relative", overflow: "hidden",
       }}>
+        {/* 装飾円 */}
+        <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "200px", height: "200px", borderRadius: "50%", background: "rgba(127,119,221,0.08)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-40px", left: "-40px", width: "140px", height: "140px", borderRadius: "50%", background: "rgba(29,158,117,0.06)", pointerEvents: "none" }} />
+
         <span style={{
-          display: "inline-block", padding: "4px 14px",
-          background: "rgba(127,119,221,0.2)", border: "1px solid rgba(127,119,221,0.4)",
-          borderRadius: "100px", fontSize: "11px", color: "#a8a4f0",
-          letterSpacing: "0.12em", fontWeight: "600", marginBottom: "1.5rem",
+          display: "inline-block", padding: "5px 16px",
+          background: "rgba(127,119,221,0.25)", border: "1px solid rgba(127,119,221,0.5)",
+          borderRadius: "100px", fontSize: "10px", color: "#c0bbf8",
+          letterSpacing: "0.15em", fontWeight: "700", marginBottom: "1.5rem", position: "relative",
         }}>COACHING BY SUKEKAKU</span>
-        <h2 style={{ fontSize: "30px", fontWeight: "700", color: "#fff", lineHeight: "1.45", margin: "0 0 1rem" }}>
+
+        <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#fff", lineHeight: "1.4", margin: "0 0 0.75rem", position: "relative" }}>
           診断はいかがでしたか？
         </h2>
-        <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.55)", lineHeight: "1.7", margin: "0 0 1.75rem" }}>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: "1.7", margin: "0 0 2rem", position: "relative" }}>
           もしかして、今こんな疑問を持っていませんか？
         </p>
+
+        {/* 大きな問い */}
         <div style={{
-          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
-          borderRadius: "16px", padding: "1.75rem 1.5rem",
+          background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "18px", padding: "2rem 1.5rem", position: "relative",
         }}>
-          <p style={{ fontSize: "20px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: 0 }}>
+          <div style={{ fontSize: "40px", color: "rgba(127,119,221,0.4)", lineHeight: 1, marginBottom: "0.5rem", fontFamily: "serif" }}>"</div>
+          <p style={{ fontSize: "19px", fontWeight: "600", color: "#fff", lineHeight: "1.75", margin: 0 }}>
             「現実」と「理想」のギャップを<br />どうすれば埋められるんだろう？
           </p>
         </div>
-      </div>
 
-      {/* ── VALIDATION ── */}
-      <div style={{
-        background: "var(--color-background-secondary)", borderRadius: "20px",
-        padding: "2rem 1.75rem", marginBottom: "1.5rem",
-      }}>
-        <p style={{ fontSize: "13px", color: "#7F77DD", fontWeight: "600", letterSpacing: "0.08em", margin: "0 0 0.75rem" }}>まず、お伝えしたいこと</p>
-        <p style={{ fontSize: "15px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>
-          その疑問は、当然です。そしてその疑問を持っていること自体が——
-        </p>
-        <div style={{ borderLeft: "3px solid #7F77DD", paddingLeft: "1.25rem" }}>
-          <p style={{ fontSize: "18px", fontWeight: "600", color: "var(--color-text-primary)", lineHeight: "1.6", margin: 0 }}>
-            今のあなたが<span style={{ color: "#7F77DD" }}>「{label}」優位</span>であることの<br />証明でもあります。
-          </p>
-        </div>
-      </div>
-
-      {/* ── TWIST: No universal solution ── */}
-      <div style={{
-        background: "linear-gradient(135deg, #1a0a0a 0%, #2a0f0f 100%)",
-        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
-      }}>
-        <p style={{ fontSize: "12px", color: "rgba(255,120,120,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1rem" }}>残念ながら、正直にお伝えします</p>
-        <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", lineHeight: "1.55", margin: "0 0 1.25rem" }}>
-          {label}優位な方の「現実」と「理想」を埋める<br />万人向けの方法は、<span style={{ color: "#ff7070" }}>存在しません。</span>
-        </h3>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "rgba(255,255,255,0.6)", margin: 0 }}>
-          おそらく{label}優位で分析力の高いあなたは、他人から示された解決策を見たとき、こう感じたことがあるはずです。
-        </p>
-        <div style={{
-          background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)",
-          borderRadius: "12px", padding: "1.25rem 1.5rem", marginTop: "1.25rem",
-        }}>
-          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.85)", lineHeight: "1.75", margin: 0, fontStyle: "italic" }}>
-            「これ、正しそうに見えるけど、<br />自分にも当てはまるかはわからないよね。」
-          </p>
-        </div>
-      </div>
-
-      {/* ── CORE TRUTH ── */}
-      <div style={{
-        borderRadius: "20px", padding: "2rem 1.75rem", marginBottom: "1.5rem",
-        border: "1px solid rgba(29,158,117,0.3)", background: "rgba(29,158,117,0.04)",
-      }}>
-        <p style={{ fontSize: "15px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
-          本当にあなたにとって価値のある解決策は——
-        </p>
-        <p style={{ fontSize: "22px", fontWeight: "700", color: "#1D9E75", lineHeight: "1.5", margin: "0 0 1rem" }}>
-          「あなた」にしか導き出せない。
-        </p>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: 0 }}>
-          この世で最もあなたを知っているのは、あなただからです。<br />
-          裏を返せば、あなたの中にある答えを見つけさえすれば、理想の状態を実現できます。
-        </p>
-      </div>
-
-      {/* ── PARADOX ── */}
-      <div style={{
-        background: "var(--color-background-secondary)", borderRadius: "20px",
-        padding: "2rem 1.75rem", marginBottom: "1.5rem",
-      }}>
-        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", fontWeight: "600", letterSpacing: "0.08em", margin: "0 0 1rem" }}>でも、ここに大きな矛盾があります</p>
-        <h3 style={{ fontSize: "20px", fontWeight: "700", color: "var(--color-text-primary)", lineHeight: "1.6", margin: "0 0 1.25rem" }}>
-          もし答えがあなたの中にあるなら、<br />なぜ優秀なあなたに<br />今まで見つけられなかったのでしょう？
-        </h3>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>
-          「自分の中に答えがあるから、考えれば、わかるはずだ。」そう思っていませんか？
-        </p>
-        <div style={{
-          background: "var(--color-background-primary)", border: "1px solid var(--color-border-secondary)",
-          borderRadius: "12px", padding: "1.25rem",
-        }}>
-          <p style={{ fontSize: "15px", fontWeight: "600", color: "var(--color-text-primary)", lineHeight: "1.7", margin: 0 }}>
-            悲しいですが、どれだけ考えても答えは見つかりません。<br />
-            <span style={{ fontSize: "13px", fontWeight: "400", color: "var(--color-text-secondary)" }}>
-              「考える」プロセスの先には、そもそも「答え」がないからです。
-            </span>
-          </p>
-        </div>
-      </div>
-
-      {/* ── BRAIN vs HEART ── */}
-      <div style={{
-        background: "linear-gradient(160deg, #0d1a12 0%, #0d1225 100%)",
-        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
-      }}>
-        <p style={{ fontSize: "12px", color: "rgba(29,200,140,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1.25rem" }}>なぜ「考える」では答えが出ないのか</p>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "rgba(255,255,255,0.65)", margin: "0 0 1.25rem" }}>
-          脳は優秀です。「どうしたいんだ？」と聞けば、瞬時に立派な解を返してくれます。<br />
-          でも、その答えは過去に見聞きした情報——SNSのアドバイス、本、周りの言葉。あなた「以外」に通用した方法をもとにした模範解答に過ぎません。
-        </p>
-        <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "1.5rem",
-        }}>
+        {/* 3つの症状カード */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginTop: "1.5rem", position: "relative" }}>
           {[
-            { icon: "🧠", label: "脳が出す答え", desc: "過去の情報・他人の成功例をもとにした模範解答", col: "rgba(255,100,100,0.15)", border: "rgba(255,100,100,0.3)" },
-            { icon: "💚", label: "心と身体の答え", desc: "あなただけの「ワクワク」と「嫌悪感」が示す本質", col: "rgba(29,158,117,0.15)", border: "rgba(29,158,117,0.35)" },
+            { emoji: "🔄", label: "堂々巡り" },
+            { emoji: "😮‍💨", label: "考えすぎて疲弊" },
+            { emoji: "📉", label: "現状が変わらない" },
           ].map(c => (
-            <div key={c.label} style={{ background: c.col, border: `1px solid ${c.border}`, borderRadius: "12px", padding: "1rem" }}>
-              <p style={{ fontSize: "22px", margin: "0 0 6px" }}>{c.icon}</p>
-              <p style={{ fontSize: "12px", fontWeight: "700", color: "#fff", margin: "0 0 6px" }}>{c.label}</p>
-              <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.6)", lineHeight: "1.6", margin: 0 }}>{c.desc}</p>
+            <div key={c.label} style={{ background: "rgba(255,255,255,0.06)", borderRadius: "12px", padding: "0.85rem 0.5rem" }}>
+              <div style={{ fontSize: "22px", marginBottom: "5px" }}>{c.emoji}</div>
+              <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.55)", fontWeight: "500", lineHeight: "1.4" }}>{c.label}</div>
             </div>
           ))}
         </div>
-        <div style={{
-          background: "rgba(255,255,255,0.06)", borderRadius: "12px", padding: "1.25rem",
-          borderLeft: "3px solid #1D9E75",
-        }}>
-          <p style={{ fontSize: "16px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: "0 0 0.5rem" }}>
-            今、あなたが本当に求めている「答え」を知っているのは、<br />あなたの<span style={{ color: "#4DD9A0" }}>「心」と「身体」</span>です。
-          </p>
-          <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.45)", margin: 0, lineHeight: "1.6" }}>
-            人間の意思決定は「身体感覚や感情（ソマティック・マーカー）」が最終決定を下している。— 神経科学者 アントニオ・ダマシオ
-          </p>
+      </div>
+
+      {/* ── TWIST + INSIGHT (1枚のカード) ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "12px" }}>
+        <div style={{ background: "var(--color-background-secondary)", borderRadius: "16px", padding: "1.25rem 1rem", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+          <div style={{ fontSize: "28px", marginBottom: "8px" }}>🚫</div>
+          <p style={{ fontSize: "13px", fontWeight: "700", color: "var(--color-text-primary)", margin: "0 0 6px", lineHeight: "1.4" }}>万人向けの<br />解決策はない</p>
+          <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", lineHeight: "1.6", margin: 0 }}>他人の答えが自分に当てはまるとは限らない</p>
+        </div>
+        <div style={{ background: "var(--color-background-secondary)", borderRadius: "16px", padding: "1.25rem 1rem", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+          <div style={{ fontSize: "28px", marginBottom: "8px" }}>💡</div>
+          <p style={{ fontSize: "13px", fontWeight: "700", color: "var(--color-text-primary)", margin: "0 0 6px", lineHeight: "1.4" }}>答えはあなたの<br />中にある</p>
+          <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", lineHeight: "1.6", margin: 0 }}>でも、考えるだけでは見つからない</p>
         </div>
       </div>
 
-      {/* ── SOMATIC CHECK ── */}
+      {/* ── 大きな問い ── */}
       <div style={{
-        borderRadius: "20px", padding: "2rem 1.75rem", marginBottom: "1.5rem",
-        background: "var(--color-background-secondary)",
+        background: "var(--color-background-secondary)", borderRadius: "20px",
+        padding: "2rem 1.75rem", marginBottom: "12px",
+        boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
       }}>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
-          もし「答え」を思い描いたとき——
+        <p style={{ fontSize: "12px", fontWeight: "700", color: "var(--color-text-tertiary)", letterSpacing: "0.1em", margin: "0 0 1rem" }}>でも、ここに大きな矛盾があります</p>
+        <p style={{ fontSize: "22px", fontWeight: "800", color: "var(--color-text-primary)", lineHeight: "1.55", margin: "0 0 1.25rem", letterSpacing: "-0.01em" }}>
+          もし答えがあなたの中にあるなら、<br />なぜ<span style={{ color: "#7F77DD" }}>優秀なあなた</span>に<br />今まで見つけられなかったのか？
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "1.25rem" }}>
-          {[
-            { emoji: "💛", text: "心がワクワクする", good: true },
-            { emoji: "🤢", text: "お腹がムカムカする・なんか違う", good: false },
-          ].map(r => (
-            <div key={r.text} style={{
-              display: "flex", alignItems: "center", gap: "12px", padding: "1rem 1.25rem",
-              background: r.good ? "rgba(29,158,117,0.08)" : "rgba(232,74,68,0.06)",
-              border: `1px solid ${r.good ? "rgba(29,158,117,0.25)" : "rgba(232,74,68,0.2)"}`,
-              borderRadius: "12px",
-            }}>
-              <span style={{ fontSize: "22px" }}>{r.emoji}</span>
-              <span style={{ fontSize: "14px", fontWeight: "500", color: "var(--color-text-primary)" }}>{r.text}</span>
-            </div>
-          ))}
-        </div>
         <div style={{
-          background: "rgba(127,119,221,0.1)", border: "1px solid rgba(127,119,221,0.3)",
-          borderRadius: "12px", padding: "1rem 1.25rem",
+          display: "flex", gap: "12px", alignItems: "flex-start",
+          background: "var(--color-background-primary)", borderRadius: "12px", padding: "1rem 1.25rem",
+          border: "1px solid var(--color-border-tertiary)",
         }}>
-          <p style={{ fontSize: "15px", fontWeight: "600", color: "#7F77DD", margin: 0, lineHeight: "1.6" }}>
-            「ムカムカ」「なんか違う」なら——それは、あなたが求める答えじゃない。
+          <span style={{ fontSize: "20px", flexShrink: 0 }}>❌</span>
+          <p style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.75", margin: 0 }}>
+            「考えれば、わかるはずだ。」——でも、「考える」プロセスの先には、そもそも答えがないのです。
           </p>
         </div>
       </div>
 
-      {/* ── JUNG + WARNING ── */}
-      <div style={{
-        background: "linear-gradient(160deg, #1a0d24 0%, #0d0d1f 100%)",
-        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem",
-      }}>
-        <p style={{ fontSize: "12px", color: "rgba(168,164,240,0.8)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 1.5rem" }}>カール・ユング 心理学的タイプ論</p>
-        <div style={{
-          background: "rgba(255,255,255,0.06)", borderRadius: "14px", padding: "1.5rem",
-          marginBottom: "1.5rem", borderLeft: "3px solid #7F77DD",
-        }}>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", lineHeight: "1.85", margin: 0 }}>
-            人間の判断は「思考・感情・感覚・直観」の4つに基づいています。<strong style={{ color: "#fff" }}>「思考」を過剰に使い続けると、相対する「感情」が無意識に抑圧されます。</strong><br />
-            その結果——感情を「考えているのか」「感じているのか」の区別がつかなくなります。
-          </p>
-        </div>
-        <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", lineHeight: "1.5", margin: "0 0 1rem" }}>
-          「よし、身体に聞いてみよう！」<br />——それが、無茶苦茶難しいのです。
-        </h3>
-        <div style={{
-          background: "rgba(232,74,68,0.15)", border: "1px solid rgba(232,74,68,0.4)",
-          borderRadius: "14px", padding: "1.5rem",
-        }}>
-          <p style={{ fontSize: "17px", fontWeight: "700", color: "#fff", lineHeight: "1.6", margin: "0 0 0.5rem" }}>
-            優秀なあなたが、{label}優位な状態から<br /><span style={{ color: "#ff7070" }}>一人で脱却することは、まず無理です。</span>
-          </p>
-          <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", margin: 0, lineHeight: "1.6" }}>
-            どれだけ考えても——考えること自体が、脱却の邪魔をしているからです。
-          </p>
-        </div>
-      </div>
-
-      {/* ── SOLUTION ── */}
-      <div style={{
-        borderRadius: "20px", padding: "2.5rem 1.75rem", marginBottom: "1.5rem",
-        background: "linear-gradient(135deg, rgba(29,158,117,0.08) 0%, rgba(29,158,117,0.03) 100%)",
-        border: "1px solid rgba(29,158,117,0.2)",
-      }}>
-        <p style={{ fontSize: "14px", color: "var(--color-text-secondary)", margin: "0 0 1rem" }}>では、どうすればいいのでしょう？</p>
-        <h3 style={{ fontSize: "32px", fontWeight: "800", color: "#1D9E75", textAlign: "center", lineHeight: "1.35", margin: "0 0 0.5rem", letterSpacing: "-0.02em" }}>
-          人に話すこと。
-        </h3>
-        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", textAlign: "center", margin: "0 0 1.75rem" }}>それが回り道じゃない、最短ルートです</p>
-        <p style={{ fontSize: "14px", lineHeight: "1.85", color: "var(--color-text-secondary)", margin: "0 0 1.25rem" }}>
-          ただし、聞いてもらう相手が同じように{label}優位では、論理の答え合わせで終わります。
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          {[
-            `${label}優位ではない`,
-            "言葉だけでなく、声のトーンや沈黙など非言語から読み取れる",
-            "あなたの内側の感覚に気づかせるフィードバックができる",
-          ].map((t, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-              <span style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1D9E75", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "2px" }}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="white"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
-              </span>
-              <span style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{t}</span>
+      {/* ── 🧠 vs 💚 比較カード ── */}
+      <div style={{ marginBottom: "12px" }}>
+        <p style={{ fontSize: "12px", fontWeight: "700", color: "var(--color-text-tertiary)", letterSpacing: "0.1em", margin: "0 0 10px 4px" }}>なぜ「考える」では答えが出ないのか</p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+          {/* 脳カード */}
+          <div style={{
+            borderRadius: "18px", overflow: "hidden",
+            boxShadow: "0 2px 12px rgba(232,74,68,0.12)",
+            border: "1px solid rgba(232,74,68,0.2)",
+          }}>
+            <div style={{ background: "linear-gradient(135deg, #2a1010 0%, #1a0808 100%)", padding: "1.25rem 1rem 1rem", textAlign: "center" }}>
+              <IconBrain />
+              <p style={{ fontSize: "13px", fontWeight: "700", color: "#ff8080", margin: "8px 0 0" }}>脳の答え</p>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── COACH PROFILE ── */}
-      <div style={{
-        borderRadius: "20px", overflow: "hidden", marginBottom: "1.5rem",
-        border: "1px solid var(--color-border-secondary)",
-      }}>
-        <div style={{ background: "linear-gradient(135deg, #7F77DD 0%, #5b53c8 100%)", padding: "1.75rem 1.75rem 1.25rem" }}>
-          <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontWeight: "600", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>ABOUT COACH</p>
-          <h3 style={{ fontSize: "22px", fontWeight: "700", color: "#fff", margin: 0, lineHeight: "1.4" }}>
-            私に、あなたの悩みを<br />聞かせてもらえませんか？
-          </h3>
-        </div>
-        <div style={{ padding: "1.75rem", background: "var(--color-background-primary)" }}>
-          <div style={{ display: "flex", gap: "12px", alignItems: "flex-start", marginBottom: "1.25rem" }}>
-            <div style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg, #7F77DD, #1D9E75)", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontSize: "22px" }}>🧭</span>
-            </div>
-            <div>
-              <p style={{ fontSize: "16px", fontWeight: "700", color: "var(--color-text-primary)", margin: "0 0 2px" }}>スケ</p>
-              <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", margin: 0 }}>プロコーチ / Sukekaku</p>
+            <div style={{ background: "var(--color-background-secondary)", padding: "1rem" }}>
+              {["他人の成功例", "SNSの情報", "本の知識"].map(t => (
+                <div key={t} style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "7px" }}>
+                  <IconX />
+                  <span style={{ fontSize: "12px", color: "var(--color-text-secondary)" }}>{t}</span>
+                </div>
+              ))}
+              <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", lineHeight: "1.5", margin: "8px 0 0" }}>あなた以外に通用した方法をもとにした模範解答</p>
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "1.5rem" }}>
+          {/* 心カード */}
+          <div style={{
+            borderRadius: "18px", overflow: "hidden",
+            boxShadow: "0 2px 12px rgba(29,158,117,0.12)",
+            border: "1px solid rgba(29,158,117,0.25)",
+          }}>
+            <div style={{ background: "linear-gradient(135deg, #0d2016 0%, #091a10 100%)", padding: "1.25rem 1rem 1rem", textAlign: "center" }}>
+              <IconHeart />
+              <p style={{ fontSize: "13px", fontWeight: "700", color: "#4DD9A0", margin: "8px 0 0" }}>心・身体の答え</p>
+            </div>
+            <div style={{ background: "var(--color-background-secondary)", padding: "1rem" }}>
+              {["あなただけの感覚", "ワクワク・嫌悪感", "本質的な欲求"].map(t => (
+                <div key={t} style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "7px" }}>
+                  <IconCheck color="#1D9E75" />
+                  <span style={{ fontSize: "12px", color: "var(--color-text-secondary)" }}>{t}</span>
+                </div>
+              ))}
+              <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", lineHeight: "1.5", margin: "8px 0 0" }}>あなただけが持つ「本当の答え」</p>
+            </div>
+          </div>
+        </div>
+        {/* 科学的根拠 */}
+        <div style={{
+          marginTop: "8px", padding: "0.85rem 1.1rem", borderRadius: "12px",
+          background: "var(--color-background-secondary)", border: "1px solid var(--color-border-tertiary)",
+          display: "flex", gap: "10px", alignItems: "flex-start",
+        }}>
+          <span style={{ fontSize: "16px", flexShrink: 0 }}>🔬</span>
+          <p style={{ fontSize: "11px", color: "var(--color-text-tertiary)", lineHeight: "1.7", margin: 0 }}>
+            <strong style={{ color: "var(--color-text-secondary)" }}>神経科学者 アントニオ・ダマシオ</strong> — 人間の意思決定は「身体感覚や感情（ソマティック・マーカー）」が最終決定を下している。
+          </p>
+        </div>
+      </div>
+
+      {/* ── ユング警告バナー ── */}
+      <div style={{
+        background: "linear-gradient(135deg, #1a0d24 0%, #0d0d1f 100%)",
+        borderRadius: "20px", padding: "2rem 1.75rem", marginBottom: "12px",
+        boxShadow: "0 4px 24px rgba(127,119,221,0.15)",
+      }}>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "1.25rem" }}>
+          <IconWarning />
+          <p style={{ fontSize: "11px", fontWeight: "700", color: "rgba(239,159,39,0.9)", letterSpacing: "0.1em", margin: 0 }}>カール・ユング 心理学的タイプ論</p>
+        </div>
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)", lineHeight: "1.85", margin: "0 0 1.5rem" }}>
+          「思考」を過剰に使い続けると、相対する<strong style={{ color: "#fff" }}>「感情」が無意識に抑圧</strong>されます。その結果——感情を「考えているのか」「感じているのか」の区別がつかなくなります。
+        </p>
+        <div style={{
+          background: "rgba(232,74,68,0.18)", border: "1px solid rgba(232,74,68,0.45)",
+          borderRadius: "14px", padding: "1.25rem 1.5rem",
+        }}>
+          <p style={{ fontSize: "17px", fontWeight: "800", color: "#fff", lineHeight: "1.55", margin: 0 }}>
+            優秀なあなたが、{label}優位な状態から<br /><span style={{ color: "#ff7070" }}>一人で脱却するのは、まず無理。</span>
+          </p>
+        </div>
+      </div>
+
+      {/* ── 解決策 ── */}
+      <div style={{ marginBottom: "12px" }}>
+        <div style={{ textAlign: "center", padding: "2rem 1rem 1.5rem" }}>
+          <p style={{ fontSize: "12px", fontWeight: "700", color: "var(--color-text-tertiary)", letterSpacing: "0.12em", margin: "0 0 0.75rem" }}>では、どうすればいいのでしょう？</p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px" }}>
+            <IconBubble />
+            <h3 style={{ fontSize: "34px", fontWeight: "900", color: "#1D9E75", margin: 0, letterSpacing: "-0.02em" }}>人に話すこと。</h3>
+          </div>
+          <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", margin: "0.5rem 0 0" }}>それが最短ルートの解決策です</p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {[
+            { icon: "🚫", bad: true, text: `同じく${label}優位な人に話す → 論理の答え合わせで終わる` },
+            { icon: "✅", bad: false, text: "非言語（声・沈黙）からも読み取れるコーチに話す → 本当の答えが見えてくる" },
+          ].map(r => (
+            <div key={r.text} style={{
+              display: "flex", gap: "12px", alignItems: "flex-start", padding: "1rem 1.25rem",
+              background: r.bad ? "rgba(232,74,68,0.05)" : "rgba(29,158,117,0.07)",
+              border: `1px solid ${r.bad ? "rgba(232,74,68,0.15)" : "rgba(29,158,117,0.2)"}`,
+              borderRadius: "14px",
+            }}>
+              <span style={{ fontSize: "18px", flexShrink: 0, marginTop: "1px" }}>{r.icon}</span>
+              <span style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{r.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── コーチプロフィール ── */}
+      <div style={{
+        borderRadius: "22px", overflow: "hidden", marginBottom: "12px",
+        boxShadow: "0 4px 32px rgba(0,0,0,0.1)",
+        border: "1px solid var(--color-border-secondary)",
+      }}>
+        {/* ヘッダー帯 */}
+        <div style={{ background: "linear-gradient(135deg, #7F77DD 0%, #5b53c8 100%)", padding: "1.75rem 1.75rem 5rem", position: "relative" }}>
+          <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.6)", fontWeight: "700", letterSpacing: "0.12em", margin: "0 0 0.4rem" }}>ABOUT COACH</p>
+          <h3 style={{ fontSize: "20px", fontWeight: "700", color: "#fff", margin: 0, lineHeight: "1.45" }}>
+            私にあなたの悩みを<br />聞かせてもらえませんか？
+          </h3>
+        </div>
+        {/* アバター（帯にオーバーラップ） */}
+        <div style={{ background: "var(--color-background-primary)", padding: "0 1.75rem 1.75rem", marginTop: "-3rem" }}>
+          <div style={{ display: "flex", gap: "14px", alignItems: "flex-end", marginBottom: "1.5rem" }}>
+            <div style={{
+              width: "64px", height: "64px", borderRadius: "50%", flexShrink: 0,
+              background: "linear-gradient(135deg, #7F77DD 0%, #1D9E75 100%)",
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px",
+              border: "3px solid var(--color-background-primary)",
+              boxShadow: "0 2px 12px rgba(127,119,221,0.3)",
+            }}>🧭</div>
+            <div style={{ paddingBottom: "4px" }}>
+              <p style={{ fontSize: "17px", fontWeight: "800", color: "var(--color-text-primary)", margin: "0 0 2px" }}>スケ</p>
+              <p style={{ fontSize: "12px", color: "#7F77DD", fontWeight: "600", margin: 0 }}>プロコーチ / Sukekaku</p>
+            </div>
+          </div>
+          {/* 実績バー */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginBottom: "1.5rem" }}>
             {[
-              { year: "過去", text: "慢性的な思考優位。不安・ストレスで眠れず、「今が楽しくない」状態が続く。" },
-              { year: "転機", text: "カナダのメンター、日本のコーチとの出会い。9年間の対話を重ねる。" },
-              { year: "現在", text: "仕事をしながら家族と日本一周。心と身体の声に従って生きている。" },
-            ].map(item => (
-              <div key={item.year} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-                <span style={{ fontSize: "11px", fontWeight: "700", color: "#7F77DD", padding: "2px 8px", background: "rgba(127,119,221,0.1)", borderRadius: "100px", flexShrink: 0, marginTop: "2px", whiteSpace: "nowrap" }}>{item.year}</span>
-                <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7", margin: 0 }}>{item.text}</p>
+              { num: "9", unit: "年", label: "コーチング\n経験" },
+              { num: "0", unit: "円", label: "体験\nセッション" },
+              { num: "4", unit: "名", label: "毎月限定\n枠" },
+            ].map(s => (
+              <div key={s.label} style={{
+                textAlign: "center", padding: "0.85rem 0.5rem", background: "var(--color-background-secondary)",
+                borderRadius: "12px",
+              }}>
+                <p style={{ fontSize: "28px", fontWeight: "900", color: "#7F77DD", margin: 0, lineHeight: 1 }}>{s.num}<span style={{ fontSize: "14px" }}>{s.unit}</span></p>
+                <p style={{ fontSize: "10px", color: "var(--color-text-tertiary)", margin: "4px 0 0", lineHeight: "1.4", whiteSpace: "pre-line" }}>{s.label}</p>
               </div>
             ))}
           </div>
-          <div style={{
-            background: "var(--color-background-secondary)", borderRadius: "12px", padding: "1rem 1.25rem",
-          }}>
-            <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.8", margin: 0 }}>
-              9年間コーチングを受け続けた日本でも珍しいプロコーチだからこそ、<strong style={{ color: "var(--color-text-primary)" }}>あなたの言語と非言語の両方から的確にフィードバック</strong>できます。
-            </p>
+          {/* タイムライン */}
+          <div style={{ position: "relative", paddingLeft: "1.5rem" }}>
+            <div style={{ position: "absolute", left: "6px", top: "8px", bottom: "8px", width: "1px", background: "var(--color-border-secondary)" }} />
+            {[
+              { label: "過去", color: "#E84A44", text: "思考優位で慢性的に苦しい。眠れない、食欲ない、「今が楽しくない」日々。" },
+              { label: "転機", color: "#EF9F27", text: "カナダのメンターと日本のコーチに出会い、9年間対話を重ねる。" },
+              { label: "現在", color: "#1D9E75", text: "仕事しながら家族と日本一周。心と身体の声に従って生きている。" },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: "12px", marginBottom: i < 2 ? "1.25rem" : 0, position: "relative" }}>
+                <div style={{ position: "absolute", left: "-1.5rem", top: "4px", width: "13px", height: "13px", borderRadius: "50%", background: item.color, border: "2px solid var(--color-background-primary)", flexShrink: 0 }} />
+                <div>
+                  <span style={{ fontSize: "11px", fontWeight: "700", color: item.color, display: "block", marginBottom: "3px" }}>{item.label}</span>
+                  <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7", margin: 0 }}>{item.text}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* ── VISUALIZATION ── */}
+      {/* ── ビジュアライゼーション ── */}
       <div style={{
-        background: "linear-gradient(160deg, #1a1408 0%, #0f1a10 100%)",
-        borderRadius: "20px", padding: "2.5rem 2rem", marginBottom: "1.5rem", textAlign: "center",
+        background: "linear-gradient(160deg, #1a1005 0%, #0f1a10 100%)",
+        borderRadius: "20px", padding: "2.25rem 1.75rem", marginBottom: "12px",
+        textAlign: "center",
       }}>
-        <p style={{ fontSize: "32px", margin: "0 0 1.25rem" }}>🎬</p>
-        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", margin: "0 0 1.25rem" }}>少し、想像してみてください。</p>
-        <p style={{ fontSize: "17px", fontWeight: "500", color: "#fff", lineHeight: "1.8", margin: "0 0 1.5rem" }}>
-          理想の人生を歩んでいるあなたは、<br />何を感じ、誰と過ごし、どんな行動をしていますか？
+        <p style={{ fontSize: "36px", margin: "0 0 1rem" }}>🎬</p>
+        <p style={{ fontSize: "18px", fontWeight: "600", color: "#fff", lineHeight: "1.75", margin: "0 0 1.25rem" }}>
+          理想の人生を歩む自分は<br />何を感じ、誰と過ごし、<br />何をしていますか？
         </p>
         <div style={{
-          background: "rgba(239,159,39,0.15)", border: "1px solid rgba(239,159,39,0.35)",
-          borderRadius: "14px", padding: "1.25rem",
+          display: "inline-block", padding: "0.85rem 1.25rem",
+          background: "rgba(239,159,39,0.2)", border: "1px solid rgba(239,159,39,0.4)",
+          borderRadius: "100px", fontSize: "14px", fontWeight: "600", color: "#EF9F27",
         }}>
-          <p style={{ fontSize: "15px", color: "#EF9F27", fontWeight: "600", margin: 0, lineHeight: "1.7" }}>
-            そのイメージに、確かな温度と<br />ワクワクする身体の感覚は伴っていますか？
-          </p>
+          そのイメージにワクワクが伴っていますか？
         </div>
       </div>
 
-      {/* ── OFFER CARD ── */}
+      {/* ── オファーカード ── */}
       <div style={{
-        borderRadius: "24px", overflow: "hidden", marginBottom: "1.5rem",
-        boxShadow: "0 8px 40px rgba(127,119,221,0.2)",
+        borderRadius: "24px", overflow: "hidden", marginBottom: "12px",
+        boxShadow: "0 8px 48px rgba(127,119,221,0.25)",
       }}>
         <div style={{
-          background: "linear-gradient(135deg, #7F77DD 0%, #9c94f0 50%, #6b62cc 100%)",
-          padding: "2rem 2rem 1.5rem", textAlign: "center",
+          background: "linear-gradient(135deg, #7F77DD 0%, #9c94f0 40%, #6558d4 100%)",
+          padding: "2.25rem 2rem 2rem", textAlign: "center", position: "relative",
         }}>
+          <div style={{ position: "absolute", top: "-30px", right: "-30px", width: "120px", height: "120px", borderRadius: "50%", background: "rgba(255,255,255,0.06)", pointerEvents: "none" }} />
           <span style={{
-            display: "inline-block", padding: "4px 16px",
-            background: "rgba(255,255,255,0.2)", borderRadius: "100px",
-            fontSize: "11px", color: "#fff", fontWeight: "700", letterSpacing: "0.12em",
-            marginBottom: "1rem",
-          }}>毎月4名様限定</span>
-          <h3 style={{ fontSize: "26px", fontWeight: "800", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.3" }}>
-            体験セッション<br />完全無料
+            display: "inline-flex", alignItems: "center", gap: "6px",
+            padding: "5px 14px", background: "rgba(255,255,255,0.2)", borderRadius: "100px",
+            fontSize: "11px", color: "#fff", fontWeight: "700", letterSpacing: "0.1em", marginBottom: "1.25rem",
+          }}>
+            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#fff", display: "inline-block", animation: "pulse 1.5s ease-in-out infinite" }} />
+            毎月4名様限定
+          </span>
+          <h3 style={{ fontSize: "30px", fontWeight: "900", color: "#fff", margin: "0 0 0.5rem", lineHeight: "1.25", letterSpacing: "-0.02em" }}>
+            体験セッション<br /><span style={{ fontSize: "20px", fontWeight: "700", opacity: 0.9 }}>完全</span> 無 料
           </h3>
-          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.75)", margin: 0 }}>60分 / オンライン / 無理な勧誘なし</p>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.7)", margin: 0 }}>60分 · オンライン · 無理な勧誘なし</p>
         </div>
         <div style={{ background: "var(--color-background-primary)", padding: "1.75rem 2rem" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "1.75rem" }}>
+          <p style={{ fontSize: "12px", fontWeight: "700", color: "var(--color-text-tertiary)", letterSpacing: "0.1em", margin: "0 0 1rem" }}>セッションで得られること</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "2rem" }}>
             {[
-              "あなたの「現実」と「理想」のギャップを整理する",
-              "心と身体が求めている本当の答えに気づく",
-              "プロコーチが言語・非言語から的確にフィードバック",
-              "押しつけや勧誘は一切ありません",
+              { icon: "🗺️", text: "「現実」と「理想」のギャップを整理・言語化する" },
+              { icon: "💚", text: "心と身体が求める本当の答えに気づく" },
+              { icon: "🎙️", text: "言語・非言語の両方から的確なフィードバック" },
+              { icon: "🔒", text: "無理な勧誘・押しつけは一切なし" },
             ].map((t, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "rgba(127,119,221,0.15)", border: "1px solid rgba(127,119,221,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "1px" }}>
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#7F77DD" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                </span>
-                <span style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{t}</span>
+              <div key={i} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                <span style={{ fontSize: "18px", flexShrink: 0 }}>{t.icon}</span>
+                <span style={{ fontSize: "14px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>{t.text}</span>
               </div>
             ))}
           </div>
           <LineBtn />
-          <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", textAlign: "center", margin: "12px 0 0", lineHeight: "1.6" }}>
-            残枠わずか・先着順 ・LINEで簡単申し込み
+          <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", textAlign: "center", margin: "10px 0 0" }}>
+            残枠わずか · 先着順 · LINEで30秒申し込み
           </p>
         </div>
       </div>
 
-      {/* ── FINAL URGENCY ── */}
+      {/* ── フィナーレ ── */}
       <div style={{
         background: "linear-gradient(160deg, #0d0d1f 0%, #15101f 100%)",
-        borderRadius: "20px", padding: "2.5rem 2rem", textAlign: "center",
+        borderRadius: "20px", padding: "2.75rem 2rem",
+        textAlign: "center", position: "relative", overflow: "hidden",
       }}>
-        <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.5)", lineHeight: "1.7", margin: "0 0 1.5rem" }}>最後に、一つだけ聞かせてください。</p>
-        <p style={{ fontSize: "20px", fontWeight: "600", color: "#fff", lineHeight: "1.7", margin: "0 0 2rem" }}>
-          今の苦しさが、<br />一年後も続いていたら——<br /><span style={{ color: "rgba(255,255,255,0.5)" }}>あなたはどう感じますか？</span>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "300px", height: "300px", borderRadius: "50%", background: "rgba(127,119,221,0.04)", pointerEvents: "none" }} />
+        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.4)", lineHeight: "1.7", margin: "0 0 1.25rem", position: "relative" }}>
+          最後に、一つだけ聞かせてください。
         </p>
-        <LineBtn label="今すぐ体験セッションを申し込む" />
-        <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.3)", margin: "1rem 0 0", lineHeight: "1.6" }}>
+        <p style={{ fontSize: "22px", fontWeight: "700", color: "#fff", lineHeight: "1.65", margin: "0 0 2rem", position: "relative" }}>
+          今の苦しさが、<br />一年後も続いていたら——<br />
+          <span style={{ color: "rgba(255,255,255,0.4)", fontWeight: "400", fontSize: "18px" }}>あなたはどう感じますか？</span>
+        </p>
+        <div style={{ position: "relative" }}>
+          <LineBtn label="今すぐ体験セッションを申し込む" />
+        </div>
+        <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.2)", margin: "1.25rem 0 0", letterSpacing: "0.06em" }}>
           Sukekaku — ユング心理学に基づくコーチング
         </p>
       </div>
@@ -1061,7 +1090,10 @@ th{padding:6px 10px;text-align:left;background:#f7f7f7;font-size:11px;font-weigh
         </div>
       )}
 
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <style>{`
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+`}</style>
     </div>
   );
 }
