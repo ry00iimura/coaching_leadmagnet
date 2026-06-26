@@ -227,6 +227,179 @@ function GapAnalysis({ scoreA, scoreB, scoreC }) {
   );
 }
 
+function SalesLP({ dominantFunc }) {
+  const label = FUNC_LABELS[dominantFunc] || "思考";
+
+  const Block = ({ children, style = {} }) => (
+    <div style={{ padding: "2rem 0", borderBottom: "0.5px solid var(--color-border-tertiary)", ...style }}>
+      {children}
+    </div>
+  );
+  const H = ({ children }) => (
+    <h2 style={{ fontSize: "20px", fontWeight: "600", lineHeight: "1.6", color: "var(--color-text-primary)", margin: "0 0 0.75rem" }}>{children}</h2>
+  );
+  const P = ({ children }) => (
+    <p style={{ fontSize: "14px", lineHeight: "1.9", color: "var(--color-text-secondary)", margin: "0 0 0.75rem" }}>{children}</p>
+  );
+  const Callout = ({ children, color = "rgba(127,119,221,0.08)", border = "rgba(127,119,221,0.3)" }) => (
+    <div style={{ background: color, border: `0.5px solid ${border}`, borderRadius: "var(--border-radius-lg)", padding: "1.25rem 1.5rem", margin: "1rem 0" }}>
+      {children}
+    </div>
+  );
+
+  return (
+    <div style={{ marginTop: "3rem", paddingTop: "3rem", borderTop: "1px solid var(--color-border-secondary)" }}>
+      <p style={{ fontSize: "11px", letterSpacing: "0.1em", color: "#7F77DD", fontWeight: "500", margin: "0 0 2rem", textTransform: "uppercase" }}>Coaching by Sukekaku</p>
+
+      {/* Hook */}
+      <Block>
+        <H>診断はいかがでしたか？</H>
+        <P>もしかして、今こんな疑問を持っていませんか？</P>
+        <Callout>
+          <p style={{ fontSize: "17px", fontWeight: "500", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>
+            どうすれば、<br />「現実」と「理想」のギャップを<br />埋められるんだろう？
+          </p>
+        </Callout>
+      </Block>
+
+      {/* Validation */}
+      <Block>
+        <P>そのような疑問は、当然です。</P>
+        <H>そして、その疑問を持っていること自体が、<br />今のあなたが<strong style={{ color: "#7F77DD" }}>「{label}」優位</strong>であることの証明でもあります。</H>
+      </Block>
+
+      {/* No universal solution */}
+      <Block>
+        <P>ここでご紹介するのは、{label}優位なあなたが「現実」と「理想」のギャップを埋めるための方法です。</P>
+        <P>いきなりで申し訳ないのですが——</P>
+        <H style={{ fontSize: "22px" }}>残念ながら、<br />{label}優位な方の「現実」と「理想」を埋める<br />万人向けの方法は、存在しません。</H>
+      </Block>
+
+      {/* Smart person dilemma */}
+      <Block>
+        <P>思い出してみてください。{label}優位で、おそらく思考力が人より高いあなたは、他人から示された解決策を見て、だいたいこう感じていませんか？</P>
+        <Callout color="var(--color-background-secondary)" border="var(--color-border-tertiary)">
+          <p style={{ fontSize: "15px", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0, fontStyle: "italic" }}>
+            「これ、正しそうに見えるけど、<br />自分にも当てはまるかどうかなんてわからないよね？」
+          </p>
+        </Callout>
+        <P style={{ marginTop: "1rem" }}>本当にあなたにとって価値のある解決策は、<strong style={{ color: "var(--color-text-primary)" }}>「あなた」にしか導き出せない</strong>のです。</P>
+        <P>なぜなら、この世で最もあなたを知っているのは、あなただからです。</P>
+      </Block>
+
+      {/* The paradox */}
+      <Block>
+        <P>裏を返せば、あなたの中にある答えを、あなたが見つけさえすれば——思考優位から脱して、理想の状態を実現できます。</P>
+        <H>でも、もし答えがあなたの中にあるなら、<br />なぜ優秀なあなたに今まで見つけられなかったのでしょう？</H>
+      </Block>
+
+      {/* Thinking won't work */}
+      <Block>
+        <P>「自分の中に答えがあるから、考えれば、わかるはずだ。」そう思っていませんか？</P>
+        <H>悲しいですが、どれだけ考えても、答えは見つかりません。</H>
+        <P>なぜなら、「考える」というプロセスの先には、そもそも「答え」がないからです。だから、優秀なあなたが、どれだけ考えても答えにたどり着けないのです。</P>
+      </Block>
+
+      {/* Brain vs Heart */}
+      <Block>
+        <P>脳は優秀です。「どうしたいんだ？」と聞かれれば、瞬時に立派な解を返してくれます。</P>
+        <P>でも、脳が出している答えは、過去の見聞きした情報——SNSのアドバイス、本に書かれていたこと、周りから聞いた答え。あなた「以外」に通用した方法をもとにした模範解答に過ぎません。</P>
+        <Callout color="rgba(29,158,117,0.06)" border="rgba(29,158,117,0.3)">
+          <p style={{ fontSize: "15px", fontWeight: "500", lineHeight: "1.8", color: "var(--color-text-primary)", margin: 0 }}>
+            今、あなたが本当に求めている「答え」を知っているのは、あなたの「脳」ではありません。<br /><strong style={{ color: "#1D9E75" }}>あなたの「心」と「身体」が知っている</strong>のです。
+          </p>
+        </Callout>
+        <div style={{ marginTop: "0.75rem", padding: "0.75rem 1rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: "1.7" }}>
+          人間の意思決定は論理だけで行われているのではなく、「身体感覚や感情（ソマティック・マーカー）」が最終決定を下していることが証明されています。（神経科学者 アントニオ・ダマシオ）
+        </div>
+      </Block>
+
+      {/* Somatic check */}
+      <Block>
+        <H>もし「答え」に、あなたの心が「ワクワクしていない」、想像すると「お腹がムカムカする」なら——</H>
+        <Callout>
+          <p style={{ fontSize: "16px", fontWeight: "600", color: "#7F77DD", margin: 0 }}>それは、あなたの求める「答え」じゃない。</p>
+        </Callout>
+      </Block>
+
+      {/* Jung + Can't alone */}
+      <Block>
+        <P>「よし！では身体に聞いてみよう！」と思ったかもしれません。でも、今の{label}優位なあなたが、心の叫び・身体の声を聞くのは、無茶苦茶難しいです。</P>
+        <div style={{ padding: "1rem 1.25rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", marginBottom: "1rem", fontSize: "13px", color: "var(--color-text-secondary)", lineHeight: "1.7" }}>
+          心理学者カール・ユング博士は、人間の判断は「思考・感情・感覚・直観」の4つに基づくと主張しました。「思考」を過剰に使っていると、相対する「感情」が無意識に抑圧されます。
+        </div>
+        <H>故に、「思考」ばかりを使ってきた人は、「感情」を「考えているのか」、「感じているのか」区別がつかないのです。</H>
+        <Callout color="rgba(232,74,68,0.06)" border="rgba(232,74,68,0.25)">
+          <p style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.7", color: "var(--color-text-primary)", margin: 0 }}>
+            優秀なあなたが、今の{label}優位な状態から<br /><strong style={{ color: "#E84A44" }}>一人で脱却することは、まず無理</strong>ということです。
+          </p>
+        </Callout>
+      </Block>
+
+      {/* Solution */}
+      <Block>
+        <P>では、どうすればいいのでしょう？</P>
+        <H style={{ fontSize: "28px", textAlign: "center", padding: "1rem 0" }}>その答えは——<br />人に話すこと</H>
+        <P>あなたが{label}優位な苦しさから脱却するためには、誰かにあなたの悩みや理想を聞いてもらい、客観的にフィードバックをもらうこと。それが回り道じゃない、最短ルートの解決策です。</P>
+        <P>ただし、聞いてもらう相手が同じように{label}優位な状態では、論理の答え合わせで終わってしまいます。</P>
+        <Callout color="var(--color-background-secondary)" border="var(--color-border-tertiary)">
+          <p style={{ fontSize: "13px", color: "var(--color-text-secondary)", margin: 0, lineHeight: "1.8" }}>
+            あなたの話し相手に必要なこと：<br />
+            <strong style={{ color: "var(--color-text-primary)" }}>・{label}優位ではない<br />・あなたの言葉だけでなく、声のトーンや沈黙など非言語から本当の答えを読み取れる</strong>
+          </p>
+        </Callout>
+      </Block>
+
+      {/* Coach intro */}
+      <Block>
+        <H>私にあなたの悩みを聞かせてもらえませんか？</H>
+        <P>私はプロコーチとして、あなたの言葉にならない思いを、言語・非言語から的確にフィードバックができる存在です。</P>
+        <div style={{ padding: "1.25rem 1.5rem", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", margin: "1rem 0", fontSize: "14px", lineHeight: "1.9", color: "var(--color-text-secondary)" }}>
+          <p style={{ margin: "0 0 0.75rem" }}>実は、私も慢性的に思考優位な状態でした。感情より理性で人生を選択するあまり、不安やストレスで眠れない、食欲がない。何より、全然「今が楽しくない」。そんな感じでした。</p>
+          <p style={{ margin: "0 0 0.75rem" }}>しかし、カナダで出会ったメンター、日本で出会ったコーチとの<strong style={{ color: "var(--color-text-primary)" }}>9年間の対話</strong>を通じて、少しずつ「感情・感覚・直観」を取り戻して、心と身体の声に耳を傾けるようになりました。</p>
+          <p style={{ margin: 0 }}>今では、仕事をしながら、家族と日本一周をするぐらいには、<strong style={{ color: "#1D9E75" }}>自分の人生を楽しめています。</strong></p>
+        </div>
+        <P>私は、これまで9年間コーチングを受け、「脳」だけじゃなく「心」と「身体」に耳を傾けるトレーニングをしてきました。だから、あなたの言語と非言語の両方から的確にフィードバックを行うことができるのです。</P>
+      </Block>
+
+      {/* Visualization */}
+      <Block>
+        <P>想像してみてください。</P>
+        <Callout color="rgba(239,159,39,0.06)" border="rgba(239,159,39,0.3)">
+          <p style={{ fontSize: "15px", lineHeight: "1.9", color: "var(--color-text-primary)", margin: "0 0 0.75rem" }}>
+            理想の人生を歩んでいるあなたは、<br />何を感じ、何を食べ、誰と過ごし、どんな行動をしていますか？<br />映画のワンシーンのようにイメージしてみてください。
+          </p>
+          <p style={{ fontSize: "14px", color: "var(--color-text-secondary)", margin: 0 }}>そのイメージには、確かな温度やワクワクするような身体の感覚が伴っていますか？</p>
+        </Callout>
+      </Block>
+
+      {/* CTA */}
+      <div style={{ marginTop: "0.5rem", background: "rgba(127,119,221,0.05)", border: "1px solid rgba(127,119,221,0.25)", borderRadius: "var(--border-radius-lg)", padding: "2rem 1.5rem", textAlign: "center" }}>
+        <p style={{ fontSize: "13px", color: "#7F77DD", fontWeight: "500", margin: "0 0 0.5rem", letterSpacing: "0.08em" }}>一人でその感覚にたどり着くのが難しいと感じたあなたへ</p>
+        <h3 style={{ fontSize: "20px", fontWeight: "600", color: "var(--color-text-primary)", margin: "0 0 1.25rem", lineHeight: "1.5" }}>体験セッションのご案内</h3>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "1.5rem" }}>
+          {["毎月4名様限定", "60分の完全無料セッション", "無理な勧誘や押しつけは一切なし"].map(t => (
+            <div key={t} style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+              <span style={{ fontSize: "14px", color: "var(--color-text-secondary)" }}>{t}</span>
+            </div>
+          ))}
+        </div>
+        <a href="https://line.me/R/ti/p/@034rnllo" target="_blank" rel="noopener noreferrer"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", padding: "16px", background: "#06C755", color: "#fff", borderRadius: "var(--border-radius-lg)", fontSize: "16px", fontWeight: "600", textDecoration: "none", marginBottom: "1rem" }}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+          LINEで体験セッションを申し込む
+        </a>
+        <p style={{ fontSize: "13px", color: "var(--color-text-tertiary)", margin: 0, lineHeight: "1.7" }}>
+          最後に一つだけ——<br />今の苦しさが一年後も続いていたら、あなたはどう感じますか？
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ChartGuide({ hasMbti }) {
   return (
     <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "1rem 1.25rem", marginBottom: "1.5rem" }}>
@@ -667,6 +840,8 @@ th{padding:6px 10px;text-align:left;background:#f7f7f7;font-size:11px;font-weigh
             style={{ marginTop: "10px", width: "100%", padding: "10px", background: "transparent", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-md)", fontSize: "13px", color: "var(--color-text-secondary)", cursor: "pointer" }}>
             もう一度診断する
           </button>
+
+          <SalesLP dominantFunc={dominantA || "T"} />
         </div>
       )}
 

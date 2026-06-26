@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "PowerShell(Start-Process powershell -ArgumentList '-NoProfile -Command cd \"G:\\\\マイドライブ\\\\github\\\\coaching_leadmagnet\"; npm run dev' -WindowStyle Normal)",
+      "mcp__claude_ai_Google_Drive__read_file_content"
+    ]
+  }
+}
