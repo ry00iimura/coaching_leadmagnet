@@ -3,7 +3,12 @@
     "allow": [
       "Skill(run)",
       "PowerShell(Start-Process powershell -ArgumentList '-NoProfile -Command cd \"G:\\\\マイドライブ\\\\github\\\\coaching_leadmagnet\"; npm run dev' -WindowStyle Normal)",
-      "mcp__claude_ai_Google_Drive__read_file_content"
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "WebFetch(domain:startbootstrap.com)",
+      "WebFetch(domain:startbootstrap.github.io)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(python -c \"import sys,json; [print\\(x['name']\\) for x in json.load\\(sys.stdin\\)]\")"
     ]
   }
 }
